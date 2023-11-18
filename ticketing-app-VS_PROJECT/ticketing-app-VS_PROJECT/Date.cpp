@@ -1,11 +1,12 @@
 #include "Date.h"
+#include <iostream>
 
 Date::Date() : day(1), month(1), year(1970) {}
 
 Date::Date(int newDay, int newMonth, int newYear) {
-	setDay(newDay);
-	setMonth(newMonth);
-	setYear(newYear);
+	this->setDay(newDay);
+	this->setMonth(newMonth);
+	this->setYear(newYear);
 }
 
 void Date::setDay(int newDay) {
