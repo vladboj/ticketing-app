@@ -29,3 +29,10 @@ int Time::getHour() {
 int Time::getMinute() {
 	return this->minute;
 }
+
+void operator>>(std::istream& console, Time& myTime) {
+	std::cout << "Hour: ";
+	console >> myTime.hour;
+	std::cout << "Minute: ";
+	console >> myTime.minute;
+}

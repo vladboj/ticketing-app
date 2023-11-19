@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 class Date {
 	int day;
@@ -15,4 +16,6 @@ public:
 	int getDay();
 	int getMonth();
 	int getYear();
+
+	friend void operator>>(std::istream& console, Date& myDate);
 };

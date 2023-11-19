@@ -1,4 +1,6 @@
 #include "EventLocation.h"
+#include <string>
+#include <iostream>
 
 EventLocation::EventLocation() : name(""), address(""), type(NONE) {}
 EventLocation::EventLocation(std::string newName, std::string newAddress, LocationType newType) {
@@ -34,4 +36,27 @@ std::string EventLocation::getAddress() {
 }
 LocationType EventLocation::getType() {
 	return this->type;
+}
+
+void operator>>(std::istream& console, EventLocation& myEventLocation) {
+	std::cout << "Name: ";
+	console >> myEventLocation.name;
+	std::cout << "Address: ";
+	console >> myEventLocation.address;
+	std::cout << "Location Type:\n";
+	std::cout << "1->Theater, 2->Stadium, 3->Standing Venue";
+	int userInput;
+	console >> userInput;
+	switch (userInput)
+	{
+	case 1:
+		myEventLocation.type = theater;
+		break;
+	case 2:
+		myEventLocation.type = stadium;
+		break;
+	case 3:
+		myEventLocation.type = standingVenue;
+		break;
+	}
 }

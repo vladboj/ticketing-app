@@ -3,6 +3,7 @@
 #include "Date.h"
 #include "Time.h"
 #include <string>
+#include <iostream>
 
 class Event {
 	std::string name;
@@ -25,4 +26,6 @@ public:
 	EventLocation getLocation();
 	Date getDate();
 	Time getTime();
+
+	friend void operator>>(std::istream& console, Event& myEvent);
 };

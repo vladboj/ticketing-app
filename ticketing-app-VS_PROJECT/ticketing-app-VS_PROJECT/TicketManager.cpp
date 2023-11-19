@@ -4,17 +4,7 @@
 void TicketManager::startApp() {
 	int choice;
 	do {
-		std::cout << std::endl;
-		std::cout << "|--------------------|\n";
-		std::cout << "|      Main menu     |\n";
-		std::cout << "|                    |\n";
-		std::cout << "| 1. Add Event       |\n";
-		std::cout << "| 2. Generate Ticket |\n";
-		std::cout << "| 3. Validate Ticket |\n";
-		std::cout << "| 4. EXIT            |\n";
-		std::cout << "|                    |\n";
-		std::cout << "|--------------------|\n";
-
+		this->displayMenu();
 		std::cout << "\nEnter your choice: ";
 		std::cin >> choice;
 		if (choice > 4) {
@@ -33,6 +23,18 @@ void TicketManager::startApp() {
 			break;
 		}
 	} while (choice != 4);
+}
+void TicketManager::displayMenu() {
+	std::cout << std::endl;
+	std::cout << "|--------------------|\n";
+	std::cout << "|      Main menu     |\n";
+	std::cout << "|                    |\n";
+	std::cout << "| 1. Add Event       |\n";
+	std::cout << "| 2. Generate Ticket |\n";
+	std::cout << "| 3. Validate Ticket |\n";
+	std::cout << "| 4. EXIT            |\n";
+	std::cout << "|                    |\n";
+	std::cout << "|--------------------|\n";
 }
 void TicketManager::addEvent() {
 

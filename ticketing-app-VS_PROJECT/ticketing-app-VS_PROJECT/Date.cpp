@@ -41,3 +41,12 @@ int Date::getMonth() {
 int Date::getYear() {
 	return this->year;
 }
+
+void operator>>(std::istream& console, Date& myDate) {
+	std::cout << "Day: ";
+	console >> myDate.day;
+	std::cout << "Month: ";
+	console >> myDate.month;
+	std::cout << "Year: ";
+	console >> myDate.year;
+}

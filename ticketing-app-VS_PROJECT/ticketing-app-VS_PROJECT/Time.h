@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 class Time {
 	int hour;
@@ -12,4 +13,6 @@ public:
 
 	int getHour();
 	int getMinute();
+
+	friend void operator>>(std::istream& console, Time& myTime);
 };

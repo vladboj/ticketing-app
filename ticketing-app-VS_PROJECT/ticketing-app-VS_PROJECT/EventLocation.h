@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 enum LocationType {NONE, theater, stadium, standingVenue};
 
@@ -18,4 +19,6 @@ public:
 	std::string getName();
 	std::string getAddress();
 	LocationType getType();
+
+	friend void operator>>(std::istream& console, EventLocation& myEventLocation);
 };

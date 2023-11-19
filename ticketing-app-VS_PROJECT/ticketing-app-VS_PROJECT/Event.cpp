@@ -1,4 +1,9 @@
+#include "EventLocation.h"
+#include "Date.h"
+#include "Time.h"
 #include "Event.h"
+#include <string>
+#include <iostream>
 
 int Event::MIN_NAME_LENGTH = 3;
 int Event::MAX_NAME_LENGTH = 40;
@@ -38,4 +43,15 @@ Date Event::getDate() {
 }
 Time Event::getTime() {
 	return this->time;
+}
+
+void operator>>(std::istream& console, Event& myEvent) {
+	std::cout << "Name: ";
+	console >> myEvent.name;
+	std::cout << "Location: ";
+	console >> myEvent.location;
+	std::cout << "Date: ";
+	console >> myEvent.date;
+	std::cout << "Time: ";
+	console >> myEvent.time;
 }
