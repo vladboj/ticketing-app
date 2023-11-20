@@ -15,5 +15,7 @@ public:
 	int getHour();
 	int getMinute();
 
+	void operator=(const Time& toBeCopied);
+
 	friend void operator>>(std::istream& console, Time& myTime);
 };

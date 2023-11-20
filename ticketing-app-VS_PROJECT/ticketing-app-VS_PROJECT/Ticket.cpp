@@ -62,6 +62,14 @@ bool Ticket::isValidated() {
 	return this->validationStatus;
 }
 
+void Ticket::operator=(const Ticket& toBeCopied) {
+	this->associatedEvent = toBeCopied.associatedEvent;
+	this->row = toBeCopied.row;
+	this->seat = toBeCopied.seat;
+	this->vipStatus = toBeCopied.vipStatus;
+	this->validationStatus = toBeCopied.validationStatus;
+}
+
 int Ticket::validateTicketId(int newTicketId) {
 	if (newTicketId < Ticket::MIN_TICKET_ID) {
 		throw std::exception("Invalid ticket ID value");

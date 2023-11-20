@@ -29,6 +29,8 @@ public:
 	int getSeat();
 	bool isVip();
 	bool isValidated();
+	
+	void operator=(const Ticket& toBeCopied);
 
 private:
 	int validateTicketId(int newTicketId);

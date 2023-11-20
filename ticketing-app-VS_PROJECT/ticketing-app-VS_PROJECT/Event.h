@@ -28,5 +28,7 @@ public:
 	Date getDate();
 	Time getTime();
 
+	void operator=(const Event& toBeCopied);
+
 	friend void operator>>(std::istream& console, Event& myEvent);
 };

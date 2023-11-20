@@ -33,6 +33,11 @@ int Time::getMinute() {
 	return this->minute;
 }
 
+void Time::operator=(const Time& toBeCopied) {
+	this->hour = toBeCopied.hour;
+	this->minute = toBeCopied.minute;
+}
+
 void operator>>(std::istream& console, Time& myTime) {
 	std::cout << "Hour: ";
 	console >> myTime.hour;

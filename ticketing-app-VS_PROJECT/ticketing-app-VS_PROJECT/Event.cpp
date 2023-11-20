@@ -51,6 +51,13 @@ Time Event::getTime() {
 	return this->time;
 }
 
+void Event::operator=(const Event& toBeCopied) {
+	this->name = toBeCopied.name;
+	this->location = toBeCopied.location;
+	this->date = toBeCopied.date;
+	this->time = toBeCopied.time;
+}
+
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "Name: ";
 	console >> myEvent.name;

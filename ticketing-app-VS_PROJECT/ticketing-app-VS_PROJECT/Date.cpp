@@ -46,6 +46,12 @@ int Date::getYear() {
 	return this->year;
 }
 
+void Date::operator=(const Date& toBeCopied) {
+	this->day = toBeCopied.day;
+	this->month = toBeCopied.month;
+	this->year = toBeCopied.year;
+}
+
 void operator>>(std::istream& console, Date& myDate) {
 	std::cout << "Day: ";
 	console >> myDate.day;

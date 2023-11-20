@@ -18,5 +18,7 @@ public:
 	int getMonth();
 	int getYear();
 
+	void operator=(const Date& toBeCopied);
+
 	friend void operator>>(std::istream& console, Date& myDate);
 };

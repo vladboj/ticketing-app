@@ -43,6 +43,12 @@ LocationType EventLocation::getType() {
 	return this->type;
 }
 
+void EventLocation::operator=(const EventLocation& toBeCopied) {
+	this->name = toBeCopied.name;
+	this->address = toBeCopied.address;
+	this->type = toBeCopied.type;
+}
+
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
 	std::cout << "Name: ";
 	console >> myEventLocation.name;

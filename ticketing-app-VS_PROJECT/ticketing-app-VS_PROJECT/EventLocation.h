@@ -21,5 +21,7 @@ public:
 	std::string getAddress();
 	LocationType getType();
 
+	void operator=(const EventLocation& toBeCopied);
+
 	friend void operator>>(std::istream& console, EventLocation& myEventLocation);
 };
