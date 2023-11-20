@@ -11,6 +11,7 @@ class EventLocation {
 public:
 	EventLocation();
 	EventLocation(std::string newName, std::string newAddress, LocationType newType);
+	EventLocation(const EventLocation& toBeCopied);
 
 	void setName(std::string newName);
 	void setAddress(std::string newAddress);

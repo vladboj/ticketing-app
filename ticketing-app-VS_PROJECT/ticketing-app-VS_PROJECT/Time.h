@@ -7,6 +7,7 @@ class Time {
 public:
 	Time();
 	Time(int newHour, int newMinute);
+	Time(const Time& toBeCopied);
 
 	void setHour(int newHour);
 	void setMinute(int newMinute);

@@ -16,6 +16,7 @@ class Event {
 public:
 	Event();
 	Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime);
+	Event(const Event& toBeCopied);
 
 	void setName(std::string newName);
 	void setLocation(EventLocation newLocation);

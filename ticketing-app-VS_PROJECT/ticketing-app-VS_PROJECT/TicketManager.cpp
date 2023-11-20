@@ -2,6 +2,7 @@
 #include <iostream>
 
 void TicketManager::startApp() {
+	this->noEvents = 0;
 	int choice;
 	do {
 		this->displayMenu();
@@ -37,7 +38,11 @@ void TicketManager::displayMenu() {
 	std::cout << "|--------------------|\n";
 }
 void TicketManager::addEvent() {
+	this->noEvents++;
+	Event* temp = new Event[noEvents];
 
+	std::cout << "Event Details:\n";
+	
 }
 void TicketManager::generateTicket() {
 

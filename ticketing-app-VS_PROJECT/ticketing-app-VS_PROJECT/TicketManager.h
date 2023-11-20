@@ -5,6 +5,8 @@
 class TicketManager {
 	Event* events;
 	Ticket* tickets;
+
+	int noEvents;
 public:
 	void startApp();
 	void displayMenu();

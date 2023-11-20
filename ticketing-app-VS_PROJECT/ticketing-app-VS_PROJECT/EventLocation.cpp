@@ -8,6 +8,11 @@ EventLocation::EventLocation(std::string newName, std::string newAddress, Locati
 	this->setAddress(newAddress);
 	this->setType(newType);
 }
+EventLocation::EventLocation(const EventLocation& toBeCopied) {
+	this->name = toBeCopied.name;
+	this->address = toBeCopied.address;
+	this->type = toBeCopied.type;
+}
 
 void EventLocation::setName(std::string newName) {
 	if (newName.empty() || newName.length() > 50) {

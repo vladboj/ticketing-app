@@ -2,10 +2,13 @@
 #include <iostream>
 
 Time::Time() : hour(0), minute(0) {}
-
 Time::Time(int newHour, int newMinute) {
 	this->setHour(newHour);
 	this->setMinute(newMinute);
+}
+Time::Time(const Time& toBeCopied) {
+	this->hour = toBeCopied.hour;
+	this->minute = toBeCopied.minute;
 }
 
 void Time::setHour(int newHour) {

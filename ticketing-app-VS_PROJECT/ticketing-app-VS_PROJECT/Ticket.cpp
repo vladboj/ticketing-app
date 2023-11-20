@@ -5,21 +5,22 @@ char Ticket::MIN_ROW = 'A';
 int Ticket::MIN_SEAT = 1;
 
 Ticket::Ticket() : ticketId(0), associatedEvent(Event()), row(0), seat(0), vipStatus(false), validationStatus(false) {}
-Ticket::Ticket(int newTicketId, Event newAssociatedEvent, char newRow, int newSeat, bool newVipStatus, bool newValidationStatus) {
-	this->setTicketId(newTicketId);
+Ticket::Ticket(int newTicketId, Event newAssociatedEvent, char newRow, int newSeat,
+	bool newVipStatus, bool newValidationStatus) : ticketId(validateTicketId(newTicketId)) {
 	this->setAssociatedEvent(newAssociatedEvent);
 	this->setRow(newRow);
 	this->setSeat(newSeat);
 	this->setVipStatus(newVipStatus);
 	this->setValidationStatus(newValidationStatus);
 }
-
-void Ticket::setTicketId(int newTicketId) {
-	if (newTicketId < Ticket::MIN_TICKET_ID) {
-		throw std::exception("Invalid ticket ID value");
-	}
-	this->ticketId = newTicketId;
+Ticket::Ticket(const Ticket& toBeCopied) : ticketId(toBeCopied.ticketId) {
+	this->associatedEvent = toBeCopied.associatedEvent;
+	this->row = toBeCopied.row;
+	this->seat = toBeCopied.seat;
+	this->vipStatus = toBeCopied.vipStatus;
+	this->validationStatus = toBeCopied.validationStatus;
 }
+
 void Ticket::setAssociatedEvent(Event newAssociatedEvent) {
 	this->associatedEvent = newAssociatedEvent;
 }
@@ -59,4 +60,11 @@ bool Ticket::isVip() {
 }
 bool Ticket::isValidated() {
 	return this->validationStatus;
+}
+
+int Ticket::validateTicketId(int newTicketId) {
+	if (newTicketId < Ticket::MIN_TICKET_ID) {
+		throw std::exception("Invalid ticket ID value");
+	}
+	return newTicketId;
 }

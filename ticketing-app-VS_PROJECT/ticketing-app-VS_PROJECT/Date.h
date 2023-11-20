@@ -8,6 +8,7 @@ class Date {
 public:
 	Date();
 	Date(int newDay, int newMonth, int newYear);
+	Date(const Date& toBeCopied);
 
 	void setDay(int newDay);
 	void setMonth(int newMonth);

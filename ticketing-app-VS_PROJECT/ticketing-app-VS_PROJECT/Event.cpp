@@ -15,6 +15,12 @@ Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time 
 	this->setDate(newDate);
 	this->setTime(newTime);
 }
+Event::Event(const Event& toBeCopied) {
+	this->name = toBeCopied.name;
+	this->location = toBeCopied.location;
+	this->date = toBeCopied.date;
+	this->time = toBeCopied.time;
+}
 
 void Event::setName(std::string newName) {
 	if (newName.length() < Event::MIN_NAME_LENGTH || newName.length() > Event::MAX_NAME_LENGTH) {

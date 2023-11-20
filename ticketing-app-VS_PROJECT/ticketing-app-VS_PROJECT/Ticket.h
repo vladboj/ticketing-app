@@ -2,7 +2,7 @@
 #include "Event.h"
 
 class Ticket {
-	int ticketId;
+	const int ticketId;
 	Event associatedEvent;
 	char row;
 	int seat;
@@ -15,8 +15,8 @@ class Ticket {
 public:
 	Ticket();
 	Ticket(int newTicketId, Event newAssociatedEvent, char newRow, int newSeat, bool newVipStatus, bool newValidationStatus);
+	Ticket(const Ticket& toBeCopied);
 
-	void setTicketId(int newTicketId);
 	void setAssociatedEvent(Event newAssociatedEvent);
 	void setRow(char newRow);
 	void setSeat(int newSeat);
@@ -29,4 +29,7 @@ public:
 	int getSeat();
 	bool isVip();
 	bool isValidated();
+
+private:
+	int validateTicketId(int newTicketId);
 };
