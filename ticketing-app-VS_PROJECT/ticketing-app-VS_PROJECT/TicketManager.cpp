@@ -40,9 +40,16 @@ void TicketManager::displayMenu() {
 void TicketManager::addEvent() {
 	this->noEvents++;
 	Event* temp = new Event[noEvents];
-
+	int i;
+	for (i = 0; i < this->noEvents - 1; i++) {
+		temp[i] = events[i];
+	}
+	Event newEvent;
 	std::cout << "Event Details:\n";
-	
+	std::cin >> newEvent;
+	temp[i] = newEvent;
+	delete[] this->events;
+	this->events = temp;
 }
 void TicketManager::generateTicket() {
 
