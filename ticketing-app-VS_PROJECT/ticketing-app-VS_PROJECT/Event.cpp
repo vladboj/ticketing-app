@@ -5,17 +5,44 @@
 #include <string>
 #include <iostream>
 
+Event* Event::events = nullptr;
+int Event::noEvents = 0;
+
+int Event::NEXT_EVENT_ID = 1;
+
 int Event::MIN_NAME_LENGTH = 3;
 int Event::MAX_NAME_LENGTH = 40;
 
-Event::Event() : name(""), location(EventLocation()), date(Date()), time(Time()) {}
-Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime) {
+void Event::printEvents() {
+	for (int i = 0; i < Event::noEvents; i++) {
+		std::cout << events[i];
+		std::cout << std::endl;
+	}
+}
+
+void Event::addEvent(const Event& newEvent) {
+	Event::noEvents++;
+	Event* temp = new Event[noEvents];
+	for (int i = 0; i < Event::noEvents - 1; i++) {
+		temp[i] = Event::events[i];
+	}
+	temp[Event::noEvents - 1] = newEvent;
+	if (Event::events != nullptr) {
+		delete[] Event::events;
+	}
+	Event::events = temp;
+	Event::NEXT_EVENT_ID++;
+}
+
+Event::Event() : id(Event::NEXT_EVENT_ID), name(""), location(EventLocation()), date(Date()), time(Time()) {}
+Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime) : id(Event::NEXT_EVENT_ID) {
 	this->setName(newName);
 	this->setLocation(newLocation);
 	this->setDate(newDate);
 	this->setTime(newTime);
 }
 Event::Event(const Event& toBeCopied) {
+	this->id = toBeCopied.id;
 	this->name = toBeCopied.name;
 	this->location = toBeCopied.location;
 	this->date = toBeCopied.date;
@@ -38,6 +65,10 @@ void Event::setTime(Time newTime) {
 	this->time = newTime;
 }
 
+int Event::getEventId() {
+	return this->id;
+}
+
 std::string Event::getName() {
 	return this->name;
 }
@@ -52,6 +83,7 @@ Time Event::getTime() {
 }
 
 void Event::operator=(const Event& toBeCopied) {
+	this->id = toBeCopied.id;
 	this->name = toBeCopied.name;
 	this->location = toBeCopied.location;
 	this->date = toBeCopied.date;
@@ -71,6 +103,7 @@ void operator>>(std::istream& console, Event& myEvent) {
 }
 
 void operator<<(std::ostream& console, const Event& myEvent) {
+	console << "\nEvent ID: " << myEvent.id;
 	console << "\nName: " << myEvent.name;
 	console << "\nLocation:" << myEvent.location;
 	console << "\nDate: " << myEvent.date;

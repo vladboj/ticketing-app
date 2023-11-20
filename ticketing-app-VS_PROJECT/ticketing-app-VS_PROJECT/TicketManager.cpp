@@ -1,7 +1,7 @@
 #include "TicketManager.h"
+#include "Event.h"
+#include "Ticket.h"
 #include <iostream>
-
-TicketManager::TicketManager() : events(nullptr), tickets(nullptr), noEvents(0) {}
 
 void TicketManager::startApp() {
 	int choice;
@@ -18,12 +18,9 @@ void TicketManager::startApp() {
 			this->addEvent();
 			break;
 		case 2:
-			this->printEvents();
-			break;
-		case 3:
 			this->generateTicket();
 			break;
-		case 4:
+		case 3:
 			this->validateTicket();
 			break;
 		}
@@ -36,38 +33,18 @@ void TicketManager::displayMenu() {
 	std::cout << "|      Main menu     |\n";
 	std::cout << "|                    |\n";
 	std::cout << "| 1. Add Event       |\n";
-	std::cout << "| 2. Show Events     |\n";
-	std::cout << "| 3. Generate Ticket |\n";
-	std::cout << "| 4. Validate Ticket |\n";
-	std::cout << "| 5. EXIT            |\n";
+	std::cout << "| 2. Generate Ticket |\n";
+	std::cout << "| 3. Validate Ticket |\n";
+	std::cout << "| 4. EXIT            |\n";
 	std::cout << "|                    |\n";
 	std::cout << "|--------------------|\n";
 }
 
 void TicketManager::addEvent() {
-	this->noEvents++;
-	Event* temp = new Event[noEvents];
-	int i;
-	for (i = 0; i < this->noEvents - 1; i++) {
-		temp[i] = events[i];
-	}
 	Event newEvent;
 	std::cout << "\nEvent Details:\n";
 	std::cin >> newEvent;
-	temp[i] = newEvent;
-	if(this->events)
-	delete[] this->events;
-	this->events = temp;
-
-	std::cout << newEvent;
-	std::cout << std::endl;
-}
-
-void TicketManager::printEvents() {
-	for (int i = 0; i < this->noEvents; i++) {
-		std::cout << this->events[i];
-		std::cout << std::endl;
-	}
+	Event::addEvent(newEvent);
 }
 
 void TicketManager::generateTicket() {
