@@ -24,4 +24,5 @@ public:
 	void operator=(const EventLocation& toBeCopied);
 
 	friend void operator>>(std::istream& console, EventLocation& myEventLocation);
+	friend void operator<<(std::ostream& console, const EventLocation& myEventLocation);
 };

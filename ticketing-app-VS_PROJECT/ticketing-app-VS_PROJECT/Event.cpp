@@ -59,12 +59,20 @@ void Event::operator=(const Event& toBeCopied) {
 }
 
 void operator>>(std::istream& console, Event& myEvent) {
-	std::cout << "Name: ";
-	console >> myEvent.name;
-	std::cout << "Location: ";
+	std::cout << "\nName: ";
+	console.ignore();
+	std::getline(console, myEvent.name);
+	std::cout << "\nLocation:";
 	console >> myEvent.location;
-	std::cout << "Date: ";
+	std::cout << "\nDate: ";
 	console >> myEvent.date;
-	std::cout << "Time: ";
+	std::cout << "\nTime: ";
 	console >> myEvent.time;
+}
+
+void operator<<(std::ostream& console, const Event& myEvent) {
+	console << "\nName: " << myEvent.name;
+	console << "\nLocation:" << myEvent.location;
+	console << "\nDate: " << myEvent.date;
+	console << "\nTime: " << myEvent.time;
 }

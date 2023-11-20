@@ -31,4 +31,5 @@ public:
 	void operator=(const Event& toBeCopied);
 
 	friend void operator>>(std::istream& console, Event& myEvent);
+	friend void operator<<(std::ostream& console, const Event& myEvent);
 };

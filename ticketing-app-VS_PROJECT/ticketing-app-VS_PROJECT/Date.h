@@ -21,4 +21,5 @@ public:
 	void operator=(const Date& toBeCopied);
 
 	friend void operator>>(std::istream& console, Date& myDate);
+	friend void operator<<(std::ostream& console, const Date& myDate);
 };

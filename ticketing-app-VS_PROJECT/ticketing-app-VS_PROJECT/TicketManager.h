@@ -8,9 +8,12 @@ class TicketManager {
 
 	int noEvents;
 public:
+	TicketManager();
+
 	void startApp();
 	void displayMenu();
 	void addEvent();
+	void printEvents();
 	void generateTicket();
 	void validateTicket();
 };

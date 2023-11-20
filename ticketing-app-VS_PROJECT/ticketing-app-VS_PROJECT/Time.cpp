@@ -39,8 +39,12 @@ void Time::operator=(const Time& toBeCopied) {
 }
 
 void operator>>(std::istream& console, Time& myTime) {
-	std::cout << "Hour: ";
+	std::cout << "\nHour: ";
 	console >> myTime.hour;
-	std::cout << "Minute: ";
+	std::cout << "\nMinute: ";
 	console >> myTime.minute;
+}
+
+void operator<<(std::ostream& console, const Time& myTime) {
+	console << myTime.hour << ":" << myTime.minute;
 }

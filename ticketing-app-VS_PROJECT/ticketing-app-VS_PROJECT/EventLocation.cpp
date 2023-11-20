@@ -50,12 +50,12 @@ void EventLocation::operator=(const EventLocation& toBeCopied) {
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
-	std::cout << "Name: ";
-	console >> myEventLocation.name;
-	std::cout << "Address: ";
-	console >> myEventLocation.address;
-	std::cout << "Location Type:\n";
-	std::cout << "1->Theater, 2->Stadium, 3->Standing Venue";
+	std::cout << "\nName: ";
+	std::getline(console, myEventLocation.name);
+	std::cout << "\nAddress: ";
+	std::getline(console, myEventLocation.address);
+	std::cout << "\nLocation Type:";
+	std::cout << "\n1->Theater, 2->Stadium, 3->Standing Venue\n";
 	int userInput;
 	console >> userInput;
 	switch (userInput)
@@ -68,6 +68,26 @@ void operator>>(std::istream& console, EventLocation& myEventLocation) {
 		break;
 	case 3:
 		myEventLocation.type = standingVenue;
+		break;
+	}
+}
+
+void operator<<(std::ostream& console, const EventLocation& myEventLocation) {
+	console << "\nName: " << myEventLocation.name;
+	console << "\nAddress: " << myEventLocation.address;
+	switch (myEventLocation.type)
+	{
+	case 1:
+		console << "\nType: Theater";
+		break;
+	case 2:
+		console << "\nType: Stadium";
+		break;
+	case 3:
+		console << "\nType: Standing Venue";
+		break;
+	default:
+		console << "\nType: NONE";
 		break;
 	}
 }

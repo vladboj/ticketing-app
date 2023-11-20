@@ -53,10 +53,14 @@ void Date::operator=(const Date& toBeCopied) {
 }
 
 void operator>>(std::istream& console, Date& myDate) {
-	std::cout << "Day: ";
+	std::cout << "\nDay: ";
 	console >> myDate.day;
-	std::cout << "Month: ";
+	std::cout << "\nMonth: ";
 	console >> myDate.month;
-	std::cout << "Year: ";
+	std::cout << "\nYear: ";
 	console >> myDate.year;
+}
+
+void operator<<(std::ostream& console, const Date& myDate) {
+	console << myDate.day << "/" << myDate.month << "/" << myDate.year;
 }
