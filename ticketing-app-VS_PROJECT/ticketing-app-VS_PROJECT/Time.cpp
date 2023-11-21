@@ -1,16 +1,34 @@
 #include "Time.h"
 #include <iostream>
 
+
+
+
+
+
+
+// DEFAULT CONSTRUCTOR
 Time::Time() : hour(0), minute(0) {}
+
+// CONSTRUCTOR WITH ARGUMENTS
 Time::Time(int newHour, int newMinute) {
 	this->setHour(newHour);
 	this->setMinute(newMinute);
 }
+
+// COPY CONSTRUCTOR
 Time::Time(const Time& toBeCopied) {
 	this->hour = toBeCopied.hour;
 	this->minute = toBeCopied.minute;
 }
 
+
+
+
+
+
+
+// SETTERS
 void Time::setHour(int newHour) {
 	if (newHour < 0 || newHour > 23) {
 		throw std::exception("Invalid minute value");
@@ -25,6 +43,13 @@ void Time::setMinute(int newMinute) {
 	this->minute = newMinute;
 }
 
+
+
+
+
+
+
+// GETTERS
 int Time::getHour() {
 	return this->hour;
 }
@@ -33,6 +58,13 @@ int Time::getMinute() {
 	return this->minute;
 }
 
+
+
+
+
+
+
+// OPERATORS OVERLOADING
 void Time::operator=(const Time& toBeCopied) {
 	this->hour = toBeCopied.hour;
 	this->minute = toBeCopied.minute;

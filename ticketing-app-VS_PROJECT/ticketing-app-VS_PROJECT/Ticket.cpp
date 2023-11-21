@@ -1,78 +1,157 @@
 #include "Ticket.h"
+#include "Event.h"
 
-int Ticket::MIN_TICKET_ID = 1;
-char Ticket::MIN_ROW = 'A';
-int Ticket::MIN_SEAT = 1;
 
-Ticket::Ticket() : ticketId(0), associatedEvent(Event()), row(0), seat(0), vipStatus(false), validationStatus(false) {}
-Ticket::Ticket(int newTicketId, Event newAssociatedEvent, char newRow, int newSeat,
-	bool newVipStatus, bool newValidationStatus) : ticketId(validateTicketId(newTicketId)) {
+
+
+
+
+
+// STATIC ATTRIBUTES INITIALIZATIONS
+Ticket* Ticket::tickets = nullptr;
+int Ticket::noTickets = 0;
+
+int Ticket::NEXT_TICKET_ID = 1;
+
+
+
+
+
+
+
+// STATIC METHODS
+void Ticket::printTickets() {
+	for (int i = 0; i < Ticket::noTickets; i++) {
+		std::cout << Ticket::tickets[i];
+		std::cout << std::endl;
+	}
+}
+
+void Ticket::addTicket(const Ticket& newTicket) {
+	Ticket::noTickets++;
+	Ticket* temp = new Ticket[Ticket::noTickets];
+	for (int i = 0; i < Ticket::noTickets - 1; i++) {
+		temp[i] = Ticket::tickets[i];
+	}
+	temp[Ticket::noTickets - 1] = newTicket;
+	if (Ticket::tickets != nullptr) {
+		delete[] Ticket::tickets;
+	}
+	Ticket::tickets = temp;
+	Ticket::NEXT_TICKET_ID++;
+}
+
+int Ticket::getNoTickets() {
+	return Ticket::noTickets;
+}
+
+Ticket* Ticket::getTickets() {
+	Ticket* newTickets = new Ticket[Ticket::noTickets];
+	for (int i = 0; i < Ticket::noTickets; i++) {
+		newTickets[i] = Ticket::tickets[i];
+	}
+	return newTickets;
+}
+
+
+
+
+
+
+
+// DEFAULT CONSTRUCTOR
+Ticket::Ticket() : id(NEXT_TICKET_ID), associatedEvent(Event()), vipStatus(false) {}
+
+// CONSTRUCTOR WITH ARGUMENTS
+Ticket::Ticket(Event newAssociatedEvent, bool newVipStatus) : id(Ticket::NEXT_TICKET_ID) {
 	this->setAssociatedEvent(newAssociatedEvent);
-	this->setRow(newRow);
-	this->setSeat(newSeat);
 	this->setVipStatus(newVipStatus);
-	this->setValidationStatus(newValidationStatus);
-}
-Ticket::Ticket(const Ticket& toBeCopied) : ticketId(toBeCopied.ticketId) {
-	this->associatedEvent = toBeCopied.associatedEvent;
-	this->row = toBeCopied.row;
-	this->seat = toBeCopied.seat;
-	this->vipStatus = toBeCopied.vipStatus;
-	this->validationStatus = toBeCopied.validationStatus;
 }
 
+// COPY CONSTRUCTOR
+Ticket::Ticket(const Ticket& toBeCopied) {
+	this->id = toBeCopied.id;
+	this->associatedEvent = toBeCopied.associatedEvent;
+	this->vipStatus = toBeCopied.vipStatus;
+}
+
+
+
+
+
+
+
+// SETTERS
 void Ticket::setAssociatedEvent(Event newAssociatedEvent) {
 	this->associatedEvent = newAssociatedEvent;
 }
-void Ticket::setRow(char newRow) {
-	if (newRow < Ticket::MIN_ROW) {
-		throw std::exception("Invalid row value");
-	}
-	this->row = newRow;
-}
-void Ticket::setSeat(int newSeat) {
-	if (newSeat < MIN_SEAT) {
-		throw std::exception("Invalid seat value");
-	}
-	this->seat = newSeat;
-}
+
 void Ticket::setVipStatus(bool newVip) {
 	this->vipStatus = newVip;
 }
-void Ticket::setValidationStatus(bool newValidationStatus) {
-	this->validationStatus = newValidationStatus;
+
+
+
+
+
+
+
+// GETTERS
+int Ticket::getId() {
+	return this->id;
 }
 
-int Ticket::getTicketId() {
-	return this->ticketId;
-}
 Event Ticket::getAssociatedEvent() {
 	return this->associatedEvent;
 }
-char Ticket::getRow() {
-	return this->row;
-}
-int Ticket::getSeat() {
-	return this->seat;
-}
+
 bool Ticket::isVip() {
 	return this->vipStatus;
 }
-bool Ticket::isValidated() {
-	return this->validationStatus;
-}
 
+
+
+
+
+
+
+// OPERATORS OVERLOADING
 void Ticket::operator=(const Ticket& toBeCopied) {
+	this -> id = toBeCopied.id;
 	this->associatedEvent = toBeCopied.associatedEvent;
-	this->row = toBeCopied.row;
-	this->seat = toBeCopied.seat;
 	this->vipStatus = toBeCopied.vipStatus;
-	this->validationStatus = toBeCopied.validationStatus;
 }
 
-int Ticket::validateTicketId(int newTicketId) {
-	if (newTicketId < Ticket::MIN_TICKET_ID) {
-		throw std::exception("Invalid ticket ID value");
+void operator>>(std::istream& console, Ticket& myTicket) {
+	// associated event
+	Event::printEvents();
+	std::cout << "\nEnter ID of the associated event!\n";
+	int chosenEventId;
+	std::cin >> chosenEventId;
+	myTicket.associatedEvent = Event::getEvent(chosenEventId);
+	
+	// vip status
+	std::cout << "\nDo you want to be a VIP? (1 for YES --- 2 for NO)\n";
+	int chosenVipStatus;
+	while(true) {
+		console >> chosenVipStatus;
+		if (chosenVipStatus == 1 || chosenVipStatus == 2) {
+			break;
+		}
+		else {
+			std::cout << "\n!!!choose either 1 or 2!!!\n";
+		}
 	}
-	return newTicketId;
+	myTicket.vipStatus = (chosenVipStatus == 1) ? true : false;
+}
+
+void operator<<(std::ostream& console, const Ticket& myTicket) {
+	// ticked id
+	console << "\nTicket ID: " << myTicket.id;
+
+	// associated event
+	console << "\nAssociated Event: " << myTicket.associatedEvent;
+	
+	// vip status
+	console << "\nVIP Status: " << myTicket.vipStatus;
 }

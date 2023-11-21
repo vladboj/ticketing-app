@@ -5,6 +5,13 @@
 #include <string>
 #include <iostream>
 
+
+
+
+
+
+
+// STATIC ATTRIBUTES INITIALIZATIONS
 Event* Event::events = nullptr;
 int Event::noEvents = 0;
 
@@ -13,6 +20,13 @@ int Event::NEXT_EVENT_ID = 1;
 int Event::MIN_NAME_LENGTH = 3;
 int Event::MAX_NAME_LENGTH = 40;
 
+
+
+
+
+
+
+// STATIC METHODS
 void Event::printEvents() {
 	for (int i = 0; i < Event::noEvents; i++) {
 		std::cout << events[i];
@@ -34,13 +48,28 @@ void Event::addEvent(const Event& newEvent) {
 	Event::NEXT_EVENT_ID++;
 }
 
+Event Event::getEvent(int id) {
+	return Event::events[id - 1];
+}
+
+
+
+
+
+
+
+// DEFAULT CONSTRUCTOR
 Event::Event() : id(Event::NEXT_EVENT_ID), name(""), location(EventLocation()), date(Date()), time(Time()) {}
+
+// CONSTRUCTOR WITH ARGUMENTS
 Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime) : id(Event::NEXT_EVENT_ID) {
 	this->setName(newName);
 	this->setLocation(newLocation);
 	this->setDate(newDate);
 	this->setTime(newTime);
 }
+
+// COPY CONSTRUCTOR
 Event::Event(const Event& toBeCopied) {
 	this->id = toBeCopied.id;
 	this->name = toBeCopied.name;
@@ -49,6 +78,13 @@ Event::Event(const Event& toBeCopied) {
 	this->time = toBeCopied.time;
 }
 
+
+
+
+
+
+
+// SETTERS
 void Event::setName(std::string newName) {
 	if (newName.length() < Event::MIN_NAME_LENGTH || newName.length() > Event::MAX_NAME_LENGTH) {
 		throw std::exception("Invalid name length");
@@ -65,6 +101,13 @@ void Event::setTime(Time newTime) {
 	this->time = newTime;
 }
 
+
+
+
+
+
+
+// GETTERS
 int Event::getEventId() {
 	return this->id;
 }
@@ -82,6 +125,13 @@ Time Event::getTime() {
 	return this->time;
 }
 
+
+
+
+
+
+
+// OPERATORS OVERLOADING
 void Event::operator=(const Event& toBeCopied) {
 	this->id = toBeCopied.id;
 	this->name = toBeCopied.name;

@@ -2,36 +2,43 @@
 #include "Event.h"
 
 class Ticket {
-	const int ticketId;
+	// NORMAL ATTRIBUTES
+	int id;
 	Event associatedEvent;
-	char row;
-	int seat;
 	bool vipStatus;
-	bool validationStatus;
 
-	static int MIN_TICKET_ID;
+	// STATIC ATTRIBUTES
+	static Ticket* tickets;
+	static int noTickets;
+
+	static int NEXT_TICKET_ID;
+
 	static char MIN_ROW;
 	static int MIN_SEAT;
 public:
+	// STATIC METHODS
+	static void printTickets();
+	static void addTicket(const Ticket& newTicket);
+	static int getNoTickets();
+	static Ticket* getTickets();
+
+	// CONSTRUCTORS
 	Ticket();
-	Ticket(int newTicketId, Event newAssociatedEvent, char newRow, int newSeat, bool newVipStatus, bool newValidationStatus);
+	Ticket(Event newAssociatedEvent, bool newVipStatus);
 	Ticket(const Ticket& toBeCopied);
 
+	// SETTERS
 	void setAssociatedEvent(Event newAssociatedEvent);
-	void setRow(char newRow);
-	void setSeat(int newSeat);
 	void setVipStatus(bool newVipStatus);
-	void setValidationStatus(bool newValidationStatus);
 
-	int getTicketId();
+	// GETTERS
+	int getId();
 	Event getAssociatedEvent();
-	char getRow();
-	int getSeat();
 	bool isVip();
-	bool isValidated();
 	
+	// OPERATORS OVERLOADING
 	void operator=(const Ticket& toBeCopied);
 
-private:
-	int validateTicketId(int newTicketId);
+	friend void operator>>(std::istream& console, Ticket& myTicket);
+	friend void operator<<(std::ostream& console, const Ticket& myTicket);
 };
