@@ -57,5 +57,7 @@ void operator>>(std::istream& console, Date& myDate) {
 }
 
 void operator<<(std::ostream& console, const Date& myDate) {
-	console << myDate.day << "/" << myDate.month << "/" << myDate.year;
+	console << (myDate.day < 10 ? "0" : "") << myDate.day << "/";
+	console << (myDate.month < 10 ? "0" : "") << myDate.month << "/";
+	console << myDate.year;
 }
