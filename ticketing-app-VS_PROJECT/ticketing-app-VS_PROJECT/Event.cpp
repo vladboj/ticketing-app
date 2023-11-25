@@ -43,11 +43,11 @@ Event Event::getEvent(int id) {
 }
 
 // DEFAULT CONSTRUCTOR
-Event::Event() : id(Event::NEXT_EVENT_ID), name(""), location(EventLocation::EventLocation()),
+Event::Event() : id(Event::NEXT_EVENT_ID), name(nullptr), location(EventLocation::EventLocation()),
 date(Date::Date()), time(Time::Time()) {}
 
 // CONSTRUCTOR WITH ARGUMENTS
-Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime) : id(Event::NEXT_EVENT_ID) {
+Event::Event(const char* newName, EventLocation newLocation, Date newDate, Time newTime) : id(Event::NEXT_EVENT_ID) {
 	this->setName(newName);
 	this->setLocation(newLocation);
 	this->setDate(newDate);
@@ -57,18 +57,30 @@ Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time 
 // COPY CONSTRUCTOR
 Event::Event(const Event& toBeCopied) {
 	this->id = toBeCopied.id;
-	this->name = toBeCopied.name;
+	this->setName(toBeCopied.name);
 	this->location = toBeCopied.location;
 	this->date = toBeCopied.date;
 	this->time = toBeCopied.time;
 }
 
+// DESTRUCTOR
+Event::~Event() {
+	if (this->name != nullptr) {
+		delete[] this->name;
+	}
+}
+
 // SETTERS
-void Event::setName(std::string newName) {
-	if (newName.length() < Event::MIN_NAME_LENGTH || newName.length() > Event::MAX_NAME_LENGTH) {
+void Event::setName(const char* newName) {
+	if (strlen(newName) < Event::MIN_NAME_LENGTH || strlen(newName) > Event::MAX_NAME_LENGTH) {
 		throw std::exception("Invalid name length");
 	}
-	this->name = newName;
+	char* temp = new char[strlen(newName) + 1];
+	strcpy_s(temp, strlen(newName) + 1, newName);
+	if (this->name != nullptr) {
+		delete[] this->name;
+	}
+	this->name = temp;
 }
 void Event::setLocation(EventLocation newLocation) {
 	this->location = newLocation;
@@ -86,7 +98,7 @@ int Event::getEventId() {
 }
 
 std::string Event::getName() {
-	return this->name;
+	return std::string(this->name);
 }
 EventLocation Event::getLocation() {
 	return this->location;
@@ -100,8 +112,11 @@ Time Event::getTime() {
 
 // OPERATORS OVERLOADING
 void Event::operator=(const Event& toBeCopied) {
+	if (this == &toBeCopied) {
+		return;
+	}
 	this->id = toBeCopied.id;
-	this->name = toBeCopied.name;
+	this->setName(toBeCopied.name);
 	this->location = toBeCopied.location;
 	this->date = toBeCopied.date;
 	this->time = toBeCopied.time;
@@ -110,8 +125,10 @@ void Event::operator=(const Event& toBeCopied) {
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";
+	char buffer[51];
 	console.ignore();
-	std::getline(console, myEvent.name);
+	console.getline(buffer, 51);
+	myEvent.setName(buffer);
 	std::cout << "\nLocation\n";
 	console >> myEvent.location;
 	std::cout << "\nDate\n";

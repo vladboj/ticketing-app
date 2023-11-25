@@ -8,7 +8,7 @@
 class Event {
 	// NORMAL ATTRIBUTES
 	int id;
-	std::string name;
+	char* name;
 	EventLocation location;
 	Date date;
 	Time time;
@@ -29,11 +29,14 @@ public:
 
 	// CONSTRUCTORS
 	Event();
-	Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime);
+	Event(const char* newName, EventLocation newLocation, Date newDate, Time newTime);
 	Event(const Event& toBeCopied);
 
+	// DESTRUCTOR
+	~Event();
+
 	// SETTERS
-	void setName(std::string newName);
+	void setName(const char* newName);
 	void setLocation(EventLocation newLocation);
 	void setDate(Date newDate);
 	void setTime(Time newTime);
