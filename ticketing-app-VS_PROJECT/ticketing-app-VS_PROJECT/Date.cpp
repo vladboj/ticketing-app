@@ -1,12 +1,6 @@
 #include "Date.h"
 #include <iostream>
 
-
-
-
-
-
-
 // DEFAULT CONSTRUCTOR
 Date::Date() : day(1), month(1), year(1970) {}
 
@@ -16,19 +10,6 @@ Date::Date(int newDay, int newMonth, int newYear) {
 	this->setMonth(newMonth);
 	this->setYear(newYear);
 }
-
-// COPY CONSTRUCTOR
-Date::Date(const Date& toBeCopied) {
-	this->day = toBeCopied.day;
-	this->month = toBeCopied.month;
-	this->year = toBeCopied.year;
-}
-
-
-
-
-
-
 
 // SETTERS
 void Date::setDay(int newDay) {
@@ -52,12 +33,6 @@ void Date::setYear(int newYear) {
 	this->year = newYear;
 }
 
-
-
-
-
-
-
 // GETTERS
 int Date::getDay() {
 	return this->day;
@@ -71,19 +46,7 @@ int Date::getYear() {
 	return this->year;
 }
 
-
-
-
-
-
-
 // OPERATORS OVERLOADING
-void Date::operator=(const Date& toBeCopied) {
-	this->day = toBeCopied.day;
-	this->month = toBeCopied.month;
-	this->year = toBeCopied.year;
-}
-
 void operator>>(std::istream& console, Date& myDate) {
 	std::cout << "\nDay: ";
 	console >> myDate.day;

@@ -1,12 +1,6 @@
 #include "Time.h"
 #include <iostream>
 
-
-
-
-
-
-
 // DEFAULT CONSTRUCTOR
 Time::Time() : hour(0), minute(0) {}
 
@@ -15,18 +9,6 @@ Time::Time(int newHour, int newMinute) {
 	this->setHour(newHour);
 	this->setMinute(newMinute);
 }
-
-// COPY CONSTRUCTOR
-Time::Time(const Time& toBeCopied) {
-	this->hour = toBeCopied.hour;
-	this->minute = toBeCopied.minute;
-}
-
-
-
-
-
-
 
 // SETTERS
 void Time::setHour(int newHour) {
@@ -43,12 +25,6 @@ void Time::setMinute(int newMinute) {
 	this->minute = newMinute;
 }
 
-
-
-
-
-
-
 // GETTERS
 int Time::getHour() {
 	return this->hour;
@@ -58,18 +34,7 @@ int Time::getMinute() {
 	return this->minute;
 }
 
-
-
-
-
-
-
 // OPERATORS OVERLOADING
-void Time::operator=(const Time& toBeCopied) {
-	this->hour = toBeCopied.hour;
-	this->minute = toBeCopied.minute;
-}
-
 void operator>>(std::istream& console, Time& myTime) {
 	std::cout << "\nHour: ";
 	console >> myTime.hour;
