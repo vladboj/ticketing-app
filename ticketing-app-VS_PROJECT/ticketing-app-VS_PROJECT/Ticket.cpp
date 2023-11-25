@@ -26,10 +26,11 @@ int Ticket::NEXT_TICKET_ID = my_rand::rand();
 
 // STATIC METHODS
 void Ticket::printTickets() {
+	std::cout << "\n__________________________________PRINTING ALL TICKETS +++START+++\n";
 	for (int i = 0; i < Ticket::noTickets; i++) {
 		std::cout << Ticket::tickets[i];
-		std::cout << std::endl;
 	}
+	std::cout << "\n__________________________________PRINTING ALL TICKETS +++END+++\n";
 }
 
 void Ticket::addTicket(const Ticket& newTicket) {
@@ -107,7 +108,7 @@ void Ticket::operator=(const Ticket& toBeCopied) {
 void operator>>(std::istream& console, Ticket& myTicket) {
 	// associated event
 	Event::printEvents();
-	std::cout << "\nEnter ID of the associated event!\n";
+	std::cout << "\nEnter ID of the event you want!\n";
 	int chosenEventId;
 	std::cin >> chosenEventId;
 	myTicket.associatedEvent = Event::getEvent(chosenEventId);
@@ -128,12 +129,8 @@ void operator>>(std::istream& console, Ticket& myTicket) {
 }
 
 void operator<<(std::ostream& console, const Ticket& myTicket) {
-	// ticked id
-	console << "\nTicket ID: " << myTicket.id;
-
-	// associated event
-	console << "\nAssociated Event: " << myTicket.associatedEvent;
-	
-	// vip status
+	console << "\n================== TICKET #" << myTicket.id << " ==================";
+	console << "\nAssociated Event" << myTicket.associatedEvent;
 	console << "\nVIP Status: " << myTicket.vipStatus;
+	console << "\n===================================================\n";
 }

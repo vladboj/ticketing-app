@@ -45,22 +45,21 @@ void TicketManager::addEvent() {
 	std::cin >> newEvent;
 	Event::addEvent(newEvent);
 
-	Event::printEvents();
+	//Event::printEvents();
 }
 
 void TicketManager::generateTicket() {
 	Ticket newTicket;
-	std::cout << "\nTicket Details:\n";
 	std::cin >> newTicket;
 	Ticket::addTicket(newTicket);
 
-	Ticket::printTickets();
+	//Ticket::printTickets();
 }
 
 void TicketManager::validateTicket() {
 	int isValid = false;
 	int givenTicketId;
-	std::cout << "\nEnter ticket ID:\n";
+	std::cout << "\nEnter ticket ID: ";
 	std::cin >> givenTicketId;
 	int noTickets = Ticket::getNoTickets();
 	Ticket* tickets = Ticket::getTickets();

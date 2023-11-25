@@ -16,9 +16,11 @@ int Event::MAX_NAME_LENGTH = 40;
 
 // STATIC METHODS
 void Event::printEvents() {
+	std::cout << "\n__________________________________PRINTING ALL EVENTS +++START+++\n";
 	for (int i = 0; i < Event::noEvents; i++) {
 		std::cout << events[i];
 	}
+	std::cout << "\n__________________________________PRINTING ALL EVENTS +++END+++\n";
 }
 
 void Event::addEvent(const Event& newEvent) {
@@ -114,14 +116,14 @@ void operator>>(std::istream& console, Event& myEvent) {
 	console >> myEvent.date;
 	std::cout << "\nTime\n";
 	console >> myEvent.time;
-	std::cout << "\n---------------------------------------------------\n";
+	std::cout << "---------------------------------------------------\n";
 }
 
 void operator<<(std::ostream& console, const Event& myEvent) {
-	std::cout << "\n------------------ EVENT " << myEvent.id << " ------------------\n";
-	console << "\n\nName: " << myEvent.name;
+	console << "\n------------------ EVENT " << myEvent.id << " ------------------\n";
+	console << "Name: " << myEvent.name;
 	console << "\n\nLocation" << myEvent.location;
 	console << "\n\nDate: " << myEvent.date;
 	console << "\n\nTime: " << myEvent.time;
-	std::cout << "\n---------------------------------------------\n";
+	console << "\n---------------------------------------------\n";
 }
