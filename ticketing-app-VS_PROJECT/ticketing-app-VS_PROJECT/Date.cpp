@@ -48,11 +48,11 @@ int Date::getYear() {
 
 // OPERATORS OVERLOADING
 void operator>>(std::istream& console, Date& myDate) {
-	std::cout << "\nDay: ";
+	std::cout << "Day: ";
 	console >> myDate.day;
-	std::cout << "\nMonth: ";
+	std::cout << "Month: ";
 	console >> myDate.month;
-	std::cout << "\nYear: ";
+	std::cout << "Year: ";
 	console >> myDate.year;
 }
 

@@ -36,10 +36,10 @@ int Time::getMinute() {
 
 // OPERATORS OVERLOADING
 void operator>>(std::istream& console, Time& myTime) {
-	std::cout << "(24-hour clock format)";
-	std::cout << "\nHour: ";
+	std::cout << "(24-hour clock format)\n";
+	std::cout << "Hour: ";
 	console >> myTime.hour;
-	std::cout << "\nMinute: ";
+	std::cout << "Minute: ";
 	console >> myTime.minute;
 }
 

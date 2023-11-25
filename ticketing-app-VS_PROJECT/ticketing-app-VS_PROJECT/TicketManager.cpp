@@ -42,7 +42,6 @@ void TicketManager::displayMenu() {
 
 void TicketManager::addEvent() {
 	Event newEvent;
-	std::cout << "\nEvent Details:\n";
 	std::cin >> newEvent;
 	Event::addEvent(newEvent);
 

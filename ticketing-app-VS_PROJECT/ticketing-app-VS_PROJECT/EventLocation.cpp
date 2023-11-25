@@ -2,12 +2,6 @@
 #include <string>
 #include <iostream>
 
-
-
-
-
-
-
 // DEFAULT CONSTRUCTOR
 EventLocation::EventLocation() : name(""), address(""), noZones(0), maxSeats(0), availableSeats(nullptr) {}
 
@@ -36,12 +30,6 @@ EventLocation::EventLocation(const EventLocation& toBeCopied) {
 	}
 	this->availableSeats = temp;
 }
-
-
-
-
-
-
 
 // SETTERS
 void EventLocation::setName(std::string newName) {
@@ -72,12 +60,6 @@ void EventLocation::setMaxSeats(int newMaxSeats) {
 	}
 }
 
-
-
-
-
-
-
 // GETTERS
 std::string EventLocation::getName() {
 	return this->name;
@@ -93,12 +75,6 @@ int EventLocation::getNoZones() {
 int EventLocation::getMaxSeats() {
 	return this->maxSeats;
 }
-
-
-
-
-
-
 
 // OPERATORS OVERLOADING
 void EventLocation::operator=(const EventLocation& toBeCopied) {
@@ -119,13 +95,13 @@ void EventLocation::operator=(const EventLocation& toBeCopied) {
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
-	std::cout << "\nName: ";
+	std::cout << "Name: ";
 	std::getline(console, myEventLocation.name);
-	std::cout << "\nAddress: ";
+	std::cout << "Address: ";
 	std::getline(console, myEventLocation.address);
-	std::cout << "\nNumber of zones: ";
+	std::cout << "Number of zones: ";
 	console >> myEventLocation.noZones;
-	std::cout << "\nNumber of total available seats: ";
+	std::cout << "Number of total available seats: ";
 	console >> myEventLocation.maxSeats;
 	myEventLocation.availableSeats = new int[myEventLocation.noZones];
 	for (int i = 0; i < myEventLocation.noZones; i++) {

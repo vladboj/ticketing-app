@@ -5,12 +5,6 @@
 #include <string>
 #include <iostream>
 
-
-
-
-
-
-
 // STATIC ATTRIBUTES INITIALIZATIONS
 Event* Event::events = nullptr;
 int Event::noEvents = 0;
@@ -20,17 +14,10 @@ int Event::NEXT_EVENT_ID = 1;
 int Event::MIN_NAME_LENGTH = 3;
 int Event::MAX_NAME_LENGTH = 40;
 
-
-
-
-
-
-
 // STATIC METHODS
 void Event::printEvents() {
 	for (int i = 0; i < Event::noEvents; i++) {
 		std::cout << events[i];
-		std::cout << std::endl;
 	}
 }
 
@@ -52,12 +39,6 @@ Event Event::getEvent(int id) {
 	return Event::events[id - 1];
 }
 
-
-
-
-
-
-
 // DEFAULT CONSTRUCTOR
 Event::Event() : id(Event::NEXT_EVENT_ID), name(""), location(EventLocation()), date(Date()), time(Time()) {}
 
@@ -78,12 +59,6 @@ Event::Event(const Event& toBeCopied) {
 	this->time = toBeCopied.time;
 }
 
-
-
-
-
-
-
 // SETTERS
 void Event::setName(std::string newName) {
 	if (newName.length() < Event::MIN_NAME_LENGTH || newName.length() > Event::MAX_NAME_LENGTH) {
@@ -100,12 +75,6 @@ void Event::setDate(Date newDate) {
 void Event::setTime(Time newTime) {
 	this->time = newTime;
 }
-
-
-
-
-
-
 
 // GETTERS
 int Event::getEventId() {
@@ -125,12 +94,6 @@ Time Event::getTime() {
 	return this->time;
 }
 
-
-
-
-
-
-
 // OPERATORS OVERLOADING
 void Event::operator=(const Event& toBeCopied) {
 	this->id = toBeCopied.id;
@@ -141,21 +104,24 @@ void Event::operator=(const Event& toBeCopied) {
 }
 
 void operator>>(std::istream& console, Event& myEvent) {
-	std::cout << "\nName: ";
+	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
+	std::cout << "Name: ";
 	console.ignore();
 	std::getline(console, myEvent.name);
-	std::cout << "\nLocation:";
+	std::cout << "\nLocation\n";
 	console >> myEvent.location;
-	std::cout << "\nDate: ";
+	std::cout << "\nDate\n";
 	console >> myEvent.date;
-	std::cout << "\nTime: ";
+	std::cout << "\nTime\n";
 	console >> myEvent.time;
+	std::cout << "\n---------------------------------------------------\n";
 }
 
 void operator<<(std::ostream& console, const Event& myEvent) {
-	console << "\nEvent ID: " << myEvent.id;
-	console << "\nName: " << myEvent.name;
-	console << "\nLocation:" << myEvent.location;
-	console << "\nDate: " << myEvent.date;
-	console << "\nTime: " << myEvent.time;
+	std::cout << "\n------------------ EVENT " << myEvent.id << " ------------------\n";
+	console << "\n\nName: " << myEvent.name;
+	console << "\n\nLocation" << myEvent.location;
+	console << "\n\nDate: " << myEvent.date;
+	console << "\n\nTime: " << myEvent.time;
+	std::cout << "\n---------------------------------------------\n";
 }
