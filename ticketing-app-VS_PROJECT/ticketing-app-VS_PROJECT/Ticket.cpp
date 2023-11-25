@@ -1,23 +1,28 @@
 #include "Ticket.h"
 #include "Event.h"
 
+// local implementation of rand function to avoid using external libraries :D
+// i might have stolen it :D but now i understand how a Linear Congruential Generator works
+namespace my_rand {
+	unsigned __int64 next = 1;
 
+	int rand() // RAND_MAX assumed to be 32767
+	{
+		next = next * 1103515245 + 12345;
+		return (unsigned __int64)(next / 65536) % 32768;
+	}
 
-
-
-
+	void srand(unsigned __int64 seed)
+	{
+		next = seed;
+	}
+}
 
 // STATIC ATTRIBUTES INITIALIZATIONS
 Ticket* Ticket::tickets = nullptr;
 int Ticket::noTickets = 0;
 
-int Ticket::NEXT_TICKET_ID = 1;
-
-
-
-
-
-
+int Ticket::NEXT_TICKET_ID = my_rand::rand();
 
 // STATIC METHODS
 void Ticket::printTickets() {
@@ -38,7 +43,8 @@ void Ticket::addTicket(const Ticket& newTicket) {
 		delete[] Ticket::tickets;
 	}
 	Ticket::tickets = temp;
-	Ticket::NEXT_TICKET_ID++;
+
+	Ticket::NEXT_TICKET_ID += my_rand::rand();
 }
 
 int Ticket::getNoTickets() {
@@ -52,12 +58,6 @@ Ticket* Ticket::getTickets() {
 	}
 	return newTickets;
 }
-
-
-
-
-
-
 
 // DEFAULT CONSTRUCTOR
 Ticket::Ticket() : id(NEXT_TICKET_ID), associatedEvent(Event()), vipStatus(false) {}
@@ -75,12 +75,6 @@ Ticket::Ticket(const Ticket& toBeCopied) {
 	this->vipStatus = toBeCopied.vipStatus;
 }
 
-
-
-
-
-
-
 // SETTERS
 void Ticket::setAssociatedEvent(Event newAssociatedEvent) {
 	this->associatedEvent = newAssociatedEvent;
@@ -89,12 +83,6 @@ void Ticket::setAssociatedEvent(Event newAssociatedEvent) {
 void Ticket::setVipStatus(bool newVip) {
 	this->vipStatus = newVip;
 }
-
-
-
-
-
-
 
 // GETTERS
 int Ticket::getId() {
@@ -108,12 +96,6 @@ Event Ticket::getAssociatedEvent() {
 bool Ticket::isVip() {
 	return this->vipStatus;
 }
-
-
-
-
-
-
 
 // OPERATORS OVERLOADING
 void Ticket::operator=(const Ticket& toBeCopied) {
