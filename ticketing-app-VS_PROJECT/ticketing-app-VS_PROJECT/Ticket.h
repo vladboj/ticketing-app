@@ -1,5 +1,6 @@
 #pragma once
 #include "Event.h"
+#include <iostream>
 
 class Ticket {
 	// NORMAL ATTRIBUTES

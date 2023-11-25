@@ -1,6 +1,7 @@
 #include "EventLocation.h"
-#include <string>
 #include <iostream>
+#include <string>
+#include <exception>
 
 // DEFAULT CONSTRUCTOR
 EventLocation::EventLocation() : name(""), address(""), noZones(0), maxSeats(0), availableSeats(nullptr) {}

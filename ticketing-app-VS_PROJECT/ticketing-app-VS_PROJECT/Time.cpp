@@ -1,5 +1,6 @@
 #include "Time.h"
 #include <iostream>
+#include <exception>
 
 // DEFAULT CONSTRUCTOR
 Time::Time() : hour(0), minute(0) {}

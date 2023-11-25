@@ -1,6 +1,4 @@
 #pragma once
-#include "Event.h"
-#include "Ticket.h"
 
 class TicketManager {
 public:

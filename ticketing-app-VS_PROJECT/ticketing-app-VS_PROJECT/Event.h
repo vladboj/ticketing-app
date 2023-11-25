@@ -2,8 +2,8 @@
 #include "EventLocation.h"
 #include "Date.h"
 #include "Time.h"
-#include <string>
 #include <iostream>
+#include <string>
 
 class Event {
 	// NORMAL ATTRIBUTES

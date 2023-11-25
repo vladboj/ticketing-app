@@ -1,5 +1,6 @@
 #include "Ticket.h"
 #include "Event.h"
+#include <iostream>
 
 // local implementation of rand function to avoid using external libraries :D
 // i might have stolen it :D but now i understand how a Linear Congruential Generator works
@@ -61,7 +62,7 @@ Ticket* Ticket::getTickets() {
 }
 
 // DEFAULT CONSTRUCTOR
-Ticket::Ticket() : id(NEXT_TICKET_ID), associatedEvent(Event()), vipStatus(false) {}
+Ticket::Ticket() : id(NEXT_TICKET_ID), associatedEvent(Event::Event()), vipStatus(false) {}
 
 // CONSTRUCTOR WITH ARGUMENTS
 Ticket::Ticket(Event newAssociatedEvent, bool newVipStatus) : id(Ticket::NEXT_TICKET_ID) {

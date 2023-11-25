@@ -1,9 +1,10 @@
+#include "Event.h"
 #include "EventLocation.h"
 #include "Date.h"
 #include "Time.h"
-#include "Event.h"
-#include <string>
 #include <iostream>
+#include <string>
+#include <exception>
 
 // STATIC ATTRIBUTES INITIALIZATIONS
 Event* Event::events = nullptr;
@@ -42,7 +43,8 @@ Event Event::getEvent(int id) {
 }
 
 // DEFAULT CONSTRUCTOR
-Event::Event() : id(Event::NEXT_EVENT_ID), name(""), location(EventLocation()), date(Date()), time(Time()) {}
+Event::Event() : id(Event::NEXT_EVENT_ID), name(""), location(EventLocation::EventLocation()),
+date(Date::Date()), time(Time::Time()) {}
 
 // CONSTRUCTOR WITH ARGUMENTS
 Event::Event(std::string newName, EventLocation newLocation, Date newDate, Time newTime) : id(Event::NEXT_EVENT_ID) {
