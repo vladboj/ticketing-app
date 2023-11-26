@@ -143,6 +143,13 @@ Time Event::operator++() {
 	return this->time;
 }
 
+explicit Event::operator int() {
+	int secondsSinceMidnight = 0;
+	secondsSinceMidnight += this->time.getHour() * 3600;
+	secondsSinceMidnight += this->time.getMinute() * 60;
+	return secondsSinceMidnight;
+}
+
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";

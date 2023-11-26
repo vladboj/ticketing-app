@@ -54,6 +54,7 @@ public:
 	int operator-(Event rightEvent);	// return how many hours are between the events
 	Time operator++(int);	// return and post-increment time by 1 hour
 	Time operator++();	// return and pre-increment time by 1 hour
+	explicit operator int();	// return number of seconds of the time since midnight
 
 	friend void operator>>(std::istream& console, Event& myEvent);
 	friend void operator<<(std::ostream& console, const Event& myEvent);
