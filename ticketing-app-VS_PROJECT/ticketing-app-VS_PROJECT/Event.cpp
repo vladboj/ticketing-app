@@ -150,6 +150,14 @@ explicit Event::operator int() {
 	return secondsSinceMidnight;
 }
 
+std::string Event::operator!() {
+	std::string reversedName = std::string(this->name);
+	for (int i = 0; i < reversedName.length() / 2; i++) {
+		std::swap(reversedName[i], reversedName[reversedName.length() - 1 - i]);
+	}
+	return reversedName;
+}
+
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";

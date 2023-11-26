@@ -55,6 +55,7 @@ public:
 	Time operator++(int);	// return and post-increment time by 1 hour
 	Time operator++();	// return and pre-increment time by 1 hour
 	explicit operator int();	// return number of seconds of the time since midnight
+	std::string operator!();	// return name spelled backwards :P
 
 	friend void operator>>(std::istream& console, Event& myEvent);
 	friend void operator<<(std::ostream& console, const Event& myEvent);
