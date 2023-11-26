@@ -129,7 +129,18 @@ char Event::operator[](int index) {
 }
 
 int Event::operator-(Event rightEvent) {
-	return abs((double)this->time.getHour() - (double)rightEvent.time.getHour());
+	return abs(this->time.getHour() - rightEvent.time.getHour());
+}
+
+Time Event::operator++(int) {
+	Time copy = this->time;
+	this->time.setHour((this->time.getHour() + 1) % 24);
+	return copy;
+}
+
+Time Event::operator++() {
+	this->time.setHour((this->time.getHour() + 1) % 24);
+	return this->time;
 }
 
 void operator>>(std::istream& console, Event& myEvent) {
