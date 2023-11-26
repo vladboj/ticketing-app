@@ -4,10 +4,10 @@
 #include <exception>
 
 // DEFAULT CONSTRUCTOR
-EventLocation::EventLocation() : name(""), address(""), noZones(0), maxSeats(0), availableSeats(nullptr) {}
+EventLocation::EventLocation() : name(nullptr), address(nullptr), noZones(0), maxSeats(0), availableSeats(nullptr) {}
 
 // CONSTRUCTOR WITH ARGUMENTS
-EventLocation::EventLocation(std::string newName, std::string newAddress, int newNoZones, int newMaxSeats) {
+EventLocation::EventLocation(const char* newName, const char* newAddress, int newNoZones, int newMaxSeats) {
 	this->setName(newName);
 	this->setAddress(newAddress);
 	this->setNoZones(newNoZones);
@@ -16,11 +16,11 @@ EventLocation::EventLocation(std::string newName, std::string newAddress, int ne
 
 // COPY CONSTRUCTOR
 EventLocation::EventLocation(const EventLocation& toBeCopied) {
-	this->name = toBeCopied.name;
-	this->address = toBeCopied.address;
-	this->noZones = toBeCopied.noZones;
-	this->maxSeats = toBeCopied.maxSeats;
-	
+	this->setName(toBeCopied.name);
+	this->setAddress(toBeCopied.address);
+	this->setNoZones(toBeCopied.noZones);
+	this->setMaxSeats(toBeCopied.maxSeats);
+
 	// available seats
 	int* temp = new int[this->noZones];
 	for (int i = 0; i < this->noZones; i++) {
@@ -33,18 +33,28 @@ EventLocation::EventLocation(const EventLocation& toBeCopied) {
 }
 
 // SETTERS
-void EventLocation::setName(std::string newName) {
-	if (newName.empty() || newName.length() > 50) {
+void EventLocation::setName(const char* newName) {
+	if (newName == nullptr || strlen(newName) > 50) {
 		throw std::exception("Invalid name length");
 	}
-	this->name = newName;
+	char* temp = new char[strlen(newName) + 1];
+	strcpy_s(temp, strlen(newName) + 1, newName);
+	if (this->name != nullptr) {
+		delete[] this->name;
+	}
+	this->name = temp;
 }
 
-void EventLocation::setAddress(std::string newAddress) {
-	if (newAddress.empty() || newAddress.length() > 50) {
+void EventLocation::setAddress(const char* newAddress) {
+	if (newAddress == nullptr || strlen(newAddress) > 50) {
 		throw std::exception("Invalid address length");
 	}
-	this->address = newAddress;
+	char* temp = new char[strlen(newAddress) + 1];
+	strcpy_s(temp, strlen(newAddress) + 1, newAddress);
+	if (this->address != nullptr) {
+		delete[] this->address;
+	}
+	this->address = temp;
 }
 
 void EventLocation::setNoZones(int newNoZones) {
@@ -63,10 +73,10 @@ void EventLocation::setMaxSeats(int newMaxSeats) {
 
 // GETTERS
 std::string EventLocation::getName() {
-	return this->name;
+	return std::string(this->name);
 }
 std::string EventLocation::getAddress() {
-	return this->address;
+	return std::string(this->address);
 }
 
 int EventLocation::getNoZones() {
@@ -79,10 +89,10 @@ int EventLocation::getMaxSeats() {
 
 // OPERATORS OVERLOADING
 void EventLocation::operator=(const EventLocation& toBeCopied) {
-	this->name = toBeCopied.name;
-	this->address = toBeCopied.address;
-	this->noZones = toBeCopied.noZones;
-	this->maxSeats = toBeCopied.maxSeats;
+	this->setName(toBeCopied.name);
+	this->setAddress(toBeCopied.address);
+	this->setNoZones(toBeCopied.noZones);
+	this->setMaxSeats(toBeCopied.maxSeats);
 
 	// available seats
 	int* temp = new int[this->noZones];
@@ -96,12 +106,22 @@ void EventLocation::operator=(const EventLocation& toBeCopied) {
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
+	char buffer[201];
+	// name
 	std::cout << "Name: ";
-	std::getline(console, myEventLocation.name);
+	console.getline(buffer, 51);
+	myEventLocation.setName(buffer);
+
+	// address
 	std::cout << "Address: ";
-	std::getline(console, myEventLocation.address);
+	console.getline(buffer, 201);
+	myEventLocation.setAddress(buffer);
+
+	// number of zones
 	std::cout << "Number of zones: ";
 	console >> myEventLocation.noZones;
+	
+	// max number of seats
 	std::cout << "Number of total available seats: ";
 	console >> myEventLocation.maxSeats;
 	myEventLocation.availableSeats = new int[myEventLocation.noZones];

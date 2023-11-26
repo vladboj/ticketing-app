@@ -4,20 +4,20 @@
 
 class EventLocation {
 	// NORMAL ATTRIBUTES
-	std::string name;
-	std::string address;
+	char* name;
+	char* address;
 	int noZones;
 	int maxSeats;
 	int* availableSeats;	// number of available seats for each zone
 public:
 	// CONSTRUCTORS
 	EventLocation();
-	EventLocation(std::string newName, std::string newAddress, int newNoZones, int newMaxSeats);
+	EventLocation(const char* newName, const char* newAddress, int newNoZones, int newMaxSeats);
 	EventLocation(const EventLocation& toBeCopied);
 
 	// SETTERS
-	void setName(std::string newName);
-	void setAddress(std::string newAddress);
+	void setName(const char* newName);
+	void setAddress(const char* newAddress);
 	void setNoZones(int newNoZones);
 	void setMaxSeats(int newMaxSeats);
 
