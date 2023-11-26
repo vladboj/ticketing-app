@@ -7,8 +7,8 @@ class EventLocation {
 	char* name;
 	char* address;
 	int noZones;
-	int maxSeats;
-	int* availableSeats;	// number of available seats for each zone
+	int availableSeats;
+	int* availableSeatsPerZone;
 	
 	// STATIC ATTRIBUTES
 	static const int MIN_NAME_LENGTH;
@@ -19,7 +19,7 @@ class EventLocation {
 public:
 	// CONSTRUCTORS
 	EventLocation();
-	EventLocation(const char* newName, const char* newAddress, int newNoZones, int newMaxSeats);
+	EventLocation(const char* newName, const char* newAddress, int newNoZones, int newAvailableSeats);
 	EventLocation(const EventLocation& toBeCopied);
 
 	// DESTRUCTOR
@@ -29,18 +29,19 @@ public:
 	void setName(const char* newName);
 	void setAddress(const char* newAddress);
 	void setNoZones(int newNoZones);
-	void setMaxSeats(int newMaxSeats);
+	void setAvailableSeats(int newAvailableSeats);
 
 	// GETTERS
 	std::string getName();
 	std::string getAddress();
 	int getNoZones();
-	int getMaxSeats();
-	//int* getAvailableSeats();
+	int getAvailableSeats();
+	//int* getAvailableSeatsPerZone();
 
 	//OPERATORS OVERLOADING
 	void operator=(const EventLocation& toBeCopied);
 	char operator[](int index);	// return first letter of name
+	int operator+(EventLocation rightEventLocation);	// return total number of available seats
 
 	friend void operator>>(std::istream& console, EventLocation& myEventLocation);
 	friend void operator<<(std::ostream& console, const EventLocation& myEventLocation);

@@ -11,14 +11,14 @@ const int EventLocation::MIN_ADDRESS_LENGTH = 10;
 const int EventLocation::MAX_ADDRESS_LENGTH = 200;
 
 // DEFAULT CONSTRUCTOR
-EventLocation::EventLocation() : name(nullptr), address(nullptr), noZones(0), maxSeats(0), availableSeats(nullptr) {}
+EventLocation::EventLocation() : name(nullptr), address(nullptr), noZones(0), availableSeats(0), availableSeatsPerZone(nullptr) {}
 
 // CONSTRUCTOR WITH ARGUMENTS
-EventLocation::EventLocation(const char* newName, const char* newAddress, int newNoZones, int newMaxSeats) {
+EventLocation::EventLocation(const char* newName, const char* newAddress, int newNoZones, int newAvailableSeats) {
 	this->setName(newName);
 	this->setAddress(newAddress);
 	this->setNoZones(newNoZones);
-	this->setMaxSeats(newMaxSeats);
+	this->setAvailableSeats(newAvailableSeats);
 }
 
 // COPY CONSTRUCTOR
@@ -28,17 +28,17 @@ EventLocation::EventLocation(const EventLocation& toBeCopied) {
 	this->address = new char[strlen(toBeCopied.address) + 1];
 	strcpy_s(this->address, strlen(toBeCopied.address) + 1, toBeCopied.address);
 	this->setNoZones(toBeCopied.noZones);
-	this->setMaxSeats(toBeCopied.maxSeats);
+	this->setAvailableSeats(toBeCopied.availableSeats);
 
 	// available seats
 	int* temp = new int[this->noZones];
 	for (int i = 0; i < this->noZones; i++) {
-		temp[i] = toBeCopied.availableSeats[i];
+		temp[i] = toBeCopied.availableSeatsPerZone[i];
 	}
-	if (this->availableSeats != nullptr) {
-		delete[] this->availableSeats;
+	if (this->availableSeatsPerZone != nullptr) {
+		delete[] this->availableSeatsPerZone;
 	}
-	this->availableSeats = temp;
+	this->availableSeatsPerZone = temp;
 }
 
 // DESTRUCTOR
@@ -49,8 +49,8 @@ EventLocation::~EventLocation() {
 	if (this->address != nullptr) {
 		delete[] this->address;
 	}
-	if (this->availableSeats != nullptr) {
-		delete[] this->availableSeats;
+	if (this->availableSeatsPerZone != nullptr) {
+		delete[] this->availableSeatsPerZone;
 	}
 }
 
@@ -83,13 +83,13 @@ void EventLocation::setNoZones(int newNoZones) {
 	this->noZones = newNoZones;
 }
 
-void EventLocation::setMaxSeats(int newMaxSeats) {
-	this->maxSeats = newMaxSeats;
+void EventLocation::setAvailableSeats(int newMaxSeats) {
+	this->availableSeats = newMaxSeats;
 
 	// available seats
-	this->availableSeats = new int[this->noZones];
+	this->availableSeatsPerZone = new int[this->noZones];
 	for (int i = 0; i < this->noZones; i++) {
-		this->availableSeats[i] = this->maxSeats / this->noZones;
+		this->availableSeatsPerZone[i] = this->availableSeats / this->noZones;
 	}
 }
 
@@ -105,8 +105,8 @@ int EventLocation::getNoZones() {
 	return this->noZones;
 }
 
-int EventLocation::getMaxSeats() {
-	return this->maxSeats;
+int EventLocation::getAvailableSeats() {
+	return this->availableSeats;
 }
 
 // OPERATORS OVERLOADING
@@ -117,21 +117,25 @@ void EventLocation::operator=(const EventLocation& toBeCopied) {
 	this->setName(toBeCopied.name);
 	this->setAddress(toBeCopied.address);
 	this->setNoZones(toBeCopied.noZones);
-	this->setMaxSeats(toBeCopied.maxSeats);
+	this->setAvailableSeats(toBeCopied.availableSeats);
 
 	// available seats
 	int* temp = new int[this->noZones];
 	for (int i = 0; i < this->noZones; i++) {
-		temp[i] = toBeCopied.availableSeats[i];
+		temp[i] = toBeCopied.availableSeatsPerZone[i];
 	}
-	if (this->availableSeats != nullptr) {
-		delete[] this->availableSeats;
+	if (this->availableSeatsPerZone != nullptr) {
+		delete[] this->availableSeatsPerZone;
 	}
-	this->availableSeats = temp;
+	this->availableSeatsPerZone = temp;
 }
 
 char EventLocation::operator[](int index) {
 	return this->name[index];
+}
+
+int EventLocation::operator+(EventLocation rightEventLocation) {
+	return this->availableSeats + rightEventLocation.availableSeats;
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
@@ -153,10 +157,10 @@ void operator>>(std::istream& console, EventLocation& myEventLocation) {
 	
 	// max number of seats
 	std::cout << "Number of total available seats: ";
-	console >> myEventLocation.maxSeats;
-	myEventLocation.availableSeats = new int[myEventLocation.noZones];
+	console >> myEventLocation.availableSeats;
+	myEventLocation.availableSeatsPerZone = new int[myEventLocation.noZones];
 	for (int i = 0; i < myEventLocation.noZones; i++) {
-		myEventLocation.availableSeats[i] = myEventLocation.maxSeats / myEventLocation.noZones;
+		myEventLocation.availableSeatsPerZone[i] = myEventLocation.availableSeats / myEventLocation.noZones;
 	}
 }
 
@@ -164,8 +168,8 @@ void operator<<(std::ostream& console, const EventLocation& myEventLocation) {
 	console << "\nName: " << myEventLocation.name;
 	console << "\nAddress: " << myEventLocation.address;
 	console << "\nNumber of zones: " << myEventLocation.noZones;
-	console << "\nNumber of total available seats: " << myEventLocation.maxSeats;
+	console << "\nNumber of total available seats: " << myEventLocation.availableSeats;
 	for (int i = 0; i < myEventLocation.noZones; i++) {
-		console << "\nNumber of available seats for zone " << i + 1 << ": " << myEventLocation.availableSeats[i];
+		console << "\nNumber of available seats for zone " << i + 1 << ": " << myEventLocation.availableSeatsPerZone[i];
 	}
 }
