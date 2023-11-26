@@ -36,6 +36,12 @@ int Time::getMinute() {
 }
 
 // OPERATORS OVERLOADING
+bool Time::operator==(const Time& rightTime) {
+	if (this->hour != rightTime.hour) return false;
+	if (this->minute != rightTime.minute) return false;
+	return true;
+}
+
 void operator>>(std::istream& console, Time& myTime) {
 	std::cout << "(24-hour clock format)\n";
 	std::cout << "Hour: ";

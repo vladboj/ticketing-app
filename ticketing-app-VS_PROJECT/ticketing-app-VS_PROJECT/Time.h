@@ -18,6 +18,8 @@ public:
 	int getMinute();
 
 	// OPERATORS OVERLOADING
+	bool operator==(const Time& rightTime);
+
 	friend void operator>>(std::istream& console, Time& myTime);
 	friend void operator<<(std::ostream& console, const Time& myTime);
 };

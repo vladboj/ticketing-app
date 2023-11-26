@@ -138,6 +138,14 @@ int EventLocation::operator+(EventLocation rightEventLocation) {
 	return this->availableSeats + rightEventLocation.availableSeats;
 }
 
+bool EventLocation::operator==(const EventLocation& rightEventLocation) {
+	if (strcmp(this->name, rightEventLocation.name) != 0) return false;
+	if (strcmp(this->address, rightEventLocation.address) != 0) return false;
+	if (this->noZones != rightEventLocation.noZones) return false;
+	if (this->availableSeats != rightEventLocation.availableSeats) return false;
+	return true;
+}
+
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
 	// name
 	std::cout << "Name: ";

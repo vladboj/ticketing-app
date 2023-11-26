@@ -57,6 +57,7 @@ public:
 	explicit operator int();	// return number of seconds of the time since midnight
 	std::string operator!();	// return name spelled backwards :P
 	bool operator<(const Event& rightEvent);	// compares ids
+	bool operator==(const Event& rightEvent);
 
 	friend void operator>>(std::istream& console, Event& myEvent);
 	friend void operator<<(std::ostream& console, const Event& myEvent);

@@ -21,6 +21,8 @@ public:
 	int getYear();
 
 	// OPERATORS OVERLOADING
+	bool operator==(const Date& rightDate);
+	
 	friend void operator>>(std::istream& console, Date& myDate);
 	friend void operator<<(std::ostream& console, const Date& myDate);
 };

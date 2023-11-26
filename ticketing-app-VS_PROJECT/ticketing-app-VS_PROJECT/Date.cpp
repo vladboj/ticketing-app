@@ -48,6 +48,13 @@ int Date::getYear() {
 }
 
 // OPERATORS OVERLOADING
+bool Date::operator==(const Date& rightDate) {
+	if (this->day != rightDate.day) return false;
+	if (this->month != rightDate.month) return false;
+	if (this->year != rightDate.year) return false;
+	return true;
+}
+
 void operator>>(std::istream& console, Date& myDate) {
 	std::cout << "Day: ";
 	console >> myDate.day;

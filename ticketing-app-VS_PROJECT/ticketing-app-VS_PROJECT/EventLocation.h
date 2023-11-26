@@ -42,6 +42,7 @@ public:
 	void operator=(const EventLocation& toBeCopied);
 	char operator[](int index);	// return first letter of name
 	int operator+(EventLocation rightEventLocation);	// return total number of available seats
+	bool operator==(const EventLocation& rightEventLocation);
 
 	friend void operator>>(std::istream& console, EventLocation& myEventLocation);
 	friend void operator<<(std::ostream& console, const EventLocation& myEventLocation);

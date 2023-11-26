@@ -162,6 +162,15 @@ bool Event::operator<(const Event& rightEvent) {
 	return this->id < rightEvent.id;
 }
 
+bool Event::operator==(const Event& rightEvent) {
+	if (this->id != rightEvent.id) return false;
+	if (strcmp(this->name, rightEvent.name) != 0) return false;
+	if (!(this->location == rightEvent.location)) return false;
+	if (!(this->date == rightEvent.date)) return false;
+	if (!(this->time == rightEvent.time)) return false;
+	return true;
+}
+
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";
