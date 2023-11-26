@@ -170,6 +170,9 @@ void operator>>(std::istream& console, Ticket& myTicket) {
 		}
 	}
 	myTicket.vipStatus = (chosenVipStatus == 1) ? true : false;
+
+	// printing the ticket id
+	std::cout << "Your ticket ID is " << myTicket.id << std::endl;
 }
 
 void operator<<(std::ostream& console, const Ticket& myTicket) {

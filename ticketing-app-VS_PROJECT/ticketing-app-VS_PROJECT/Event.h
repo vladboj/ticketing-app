@@ -19,8 +19,8 @@ class Event {
 
 	static int NEXT_EVENT_ID;
 
-	static int MIN_NAME_LENGTH;
-	static int MAX_NAME_LENGTH;
+	static const int MIN_NAME_LENGTH;
+	static const int MAX_NAME_LENGTH;
 public:
 	// STATIC METHODS
 	static void printEvents();

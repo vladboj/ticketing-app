@@ -12,8 +12,8 @@ int Event::noEvents = 0;
 
 int Event::NEXT_EVENT_ID = 1;
 
-int Event::MIN_NAME_LENGTH = 3;
-int Event::MAX_NAME_LENGTH = 40;
+const int Event::MIN_NAME_LENGTH = 3;
+const int Event::MAX_NAME_LENGTH = 50;
 
 // STATIC METHODS
 void Event::printEvents() {
@@ -130,9 +130,9 @@ char Event::operator[](int index) {
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";
-	char buffer[51];
+	char buffer[Event::MAX_NAME_LENGTH];
 	console.ignore();
-	console.getline(buffer, 51);
+	console.getline(buffer, Event::MAX_NAME_LENGTH + 1);
 	myEvent.setName(buffer);
 	std::cout << "\nLocation\n";
 	console >> myEvent.location;

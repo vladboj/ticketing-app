@@ -3,6 +3,13 @@
 #include <string>
 #include <exception>
 
+// STATIC ATTRIBUTES INITIALIZATIONS
+const int EventLocation::MIN_NAME_LENGTH = 3;
+const int EventLocation::MAX_NAME_LENGTH = 50;
+
+const int EventLocation::MIN_ADDRESS_LENGTH = 10;
+const int EventLocation::MAX_ADDRESS_LENGTH = 200;
+
 // DEFAULT CONSTRUCTOR
 EventLocation::EventLocation() : name(nullptr), address(nullptr), noZones(0), maxSeats(0), availableSeats(nullptr) {}
 
@@ -42,11 +49,14 @@ EventLocation::~EventLocation() {
 	if (this->address != nullptr) {
 		delete[] this->address;
 	}
+	if (this->availableSeats != nullptr) {
+		delete[] this->availableSeats;
+	}
 }
 
 // SETTERS
 void EventLocation::setName(const char* newName) {
-	if (newName == nullptr || strlen(newName) > 50) {
+	if (strlen(newName) < EventLocation::MIN_NAME_LENGTH || strlen(newName) > EventLocation::MAX_NAME_LENGTH) {
 		throw std::exception("Invalid name length");
 	}
 	char* temp = new char[strlen(newName) + 1];
@@ -58,7 +68,7 @@ void EventLocation::setName(const char* newName) {
 }
 
 void EventLocation::setAddress(const char* newAddress) {
-	if (newAddress == nullptr || strlen(newAddress) > 50) {
+	if (strlen(newAddress) < EventLocation::MIN_ADDRESS_LENGTH || strlen(newAddress) > EventLocation::MAX_ADDRESS_LENGTH) {
 		throw std::exception("Invalid address length");
 	}
 	char* temp = new char[strlen(newAddress) + 1];
@@ -125,16 +135,17 @@ char EventLocation::operator[](int index) {
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
-	char buffer[201];
 	// name
 	std::cout << "Name: ";
-	console.getline(buffer, 51);
-	myEventLocation.setName(buffer);
+	char buffer1[EventLocation::MAX_NAME_LENGTH + 1];
+	console.getline(buffer1, EventLocation::MAX_NAME_LENGTH + 1);
+	myEventLocation.setName(buffer1);
 
 	// address
 	std::cout << "Address: ";
-	console.getline(buffer, 201);
-	myEventLocation.setAddress(buffer);
+	char buffer2[EventLocation::MAX_ADDRESS_LENGTH + 1];
+	console.getline(buffer2, EventLocation::MAX_ADDRESS_LENGTH);
+	myEventLocation.setAddress(buffer2);
 
 	// number of zones
 	std::cout << "Number of zones: ";

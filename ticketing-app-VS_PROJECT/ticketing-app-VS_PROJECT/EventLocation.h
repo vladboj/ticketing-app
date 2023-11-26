@@ -9,6 +9,13 @@ class EventLocation {
 	int noZones;
 	int maxSeats;
 	int* availableSeats;	// number of available seats for each zone
+	
+	// STATIC ATTRIBUTES
+	static const int MIN_NAME_LENGTH;
+	static const int MAX_NAME_LENGTH;
+
+	static const int MIN_ADDRESS_LENGTH;
+	static const int MAX_ADDRESS_LENGTH;
 public:
 	// CONSTRUCTORS
 	EventLocation();
