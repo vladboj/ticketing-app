@@ -151,6 +151,17 @@ std::string Ticket::operator+(Ticket rightTicket) {
 	return std::string(this->ownerName) + " and " + std::string(rightTicket.ownerName);
 }
 
+Ticket Ticket::operator++(int) {
+	Ticket copy = *this;
+	this->vipStatus = true;
+	return copy;
+}
+
+Ticket Ticket::operator++() {
+	this->vipStatus = true;
+	return *this;
+}
+
 void operator>>(std::istream& console, Ticket& myTicket) {
 	std::cout << "Enter your name: ";
 	char buffer[Ticket::MAX_NAME_LENGTH + 1];
