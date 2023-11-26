@@ -16,8 +16,10 @@ EventLocation::EventLocation(const char* newName, const char* newAddress, int ne
 
 // COPY CONSTRUCTOR
 EventLocation::EventLocation(const EventLocation& toBeCopied) {
-	this->setName(toBeCopied.name);
-	this->setAddress(toBeCopied.address);
+	this->name = new char[strlen(toBeCopied.name) + 1];
+	strcpy_s(this->name, strlen(toBeCopied.name) + 1, toBeCopied.name);
+	this->address = new char[strlen(toBeCopied.address) + 1];
+	strcpy_s(this->address, strlen(toBeCopied.address) + 1, toBeCopied.address);
 	this->setNoZones(toBeCopied.noZones);
 	this->setMaxSeats(toBeCopied.maxSeats);
 
@@ -116,6 +118,10 @@ void EventLocation::operator=(const EventLocation& toBeCopied) {
 		delete[] this->availableSeats;
 	}
 	this->availableSeats = temp;
+}
+
+char EventLocation::operator[](int index) {
+	return this->name[index];
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {

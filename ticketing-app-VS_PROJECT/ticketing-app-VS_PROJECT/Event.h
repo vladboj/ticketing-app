@@ -50,6 +50,7 @@ public:
 
 	// OPERATORS OVERLOADING
 	void operator=(const Event& toBeCopied);
+	char operator[](int index);	// return first letter of name
 
 	friend void operator>>(std::istream& console, Event& myEvent);
 	friend void operator<<(std::ostream& console, const Event& myEvent);

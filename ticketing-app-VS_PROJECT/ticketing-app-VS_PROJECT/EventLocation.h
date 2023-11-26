@@ -33,6 +33,7 @@ public:
 
 	//OPERATORS OVERLOADING
 	void operator=(const EventLocation& toBeCopied);
+	char operator[](int index);	// return first letter of name
 
 	friend void operator>>(std::istream& console, EventLocation& myEventLocation);
 	friend void operator<<(std::ostream& console, const EventLocation& myEventLocation);

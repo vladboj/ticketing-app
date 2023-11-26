@@ -123,6 +123,10 @@ void Event::operator=(const Event& toBeCopied) {
 	this->time = toBeCopied.time;
 }
 
+char Event::operator[](int index) {
+	return this->name[index];
+}
+
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";

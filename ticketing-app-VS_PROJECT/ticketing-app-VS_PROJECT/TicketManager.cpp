@@ -44,7 +44,7 @@ void TicketManager::addEvent() {
 	Event newEvent;
 	std::cin >> newEvent;
 	Event::addEvent(newEvent);
-
+	
 	//Event::printEvents();
 }
 
