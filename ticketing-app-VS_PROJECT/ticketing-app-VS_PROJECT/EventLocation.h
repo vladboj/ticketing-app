@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 #include <iostream>
 #include <string>
 
@@ -36,7 +36,8 @@ public:
 	std::string getAddress();
 	int getNoZones();
 	int getAvailableSeats();
-	//int* getAvailableSeatsPerZone();
+	int* getAvailableSeatsPerZone();
+	void printAvailableZones();
 
 	//OPERATORS OVERLOADING
 	void operator=(const EventLocation& toBeCopied);

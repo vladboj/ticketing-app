@@ -80,17 +80,24 @@ void EventLocation::setAddress(const char* newAddress) {
 }
 
 void EventLocation::setNoZones(int newNoZones) {
+	if (newNoZones < 1) {
+		throw std::exception("Invalid number of zones");
+	}
 	this->noZones = newNoZones;
 }
 
-void EventLocation::setAvailableSeats(int newMaxSeats) {
-	this->availableSeats = newMaxSeats;
+void EventLocation::setAvailableSeats(int newAvailableSeats) {
+	if (newAvailableSeats < 1 || newAvailableSeats < this->noZones) {
+		throw std::exception("Invalid number of available seats");
+	}
+	this->availableSeats = newAvailableSeats;
 
 	// available seats
 	this->availableSeatsPerZone = new int[this->noZones];
 	for (int i = 0; i < this->noZones; i++) {
 		this->availableSeatsPerZone[i] = this->availableSeats / this->noZones;
 	}
+	this->availableSeatsPerZone[this->noZones - 1] += this->availableSeats % this->noZones;
 }
 
 // GETTERS
@@ -107,6 +114,23 @@ int EventLocation::getNoZones() {
 
 int EventLocation::getAvailableSeats() {
 	return this->availableSeats;
+}
+
+int* EventLocation::getAvailableSeatsPerZone() {
+	int* temp = new int[this->noZones];
+	for (int i = 0; i < this->noZones; i++) {
+		temp[i] = this->availableSeatsPerZone[i];
+	}
+	return temp;
+}
+
+void EventLocation::printAvailableZones() {
+	std::cout << "\nAvailable zones: ";
+	for (int i = 0; i < this->noZones; i++) {
+		if (this->availableSeatsPerZone[i] > 0) {
+			std::cout << i + 1 << " ";
+		}
+	}
 }
 
 // OPERATORS OVERLOADING

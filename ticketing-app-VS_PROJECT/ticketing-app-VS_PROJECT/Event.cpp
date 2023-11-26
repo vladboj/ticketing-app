@@ -143,7 +143,7 @@ Event Event::operator++() {
 	return *this;
 }
 
-explicit Event::operator int() {
+Event::operator int() {
 	int secondsSinceMidnight = 0;
 	secondsSinceMidnight += this->time.getHour() * 3600;
 	secondsSinceMidnight += this->time.getMinute() * 60;

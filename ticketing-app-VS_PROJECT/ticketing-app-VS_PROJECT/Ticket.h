@@ -47,7 +47,7 @@ public:
 	
 	// OPERATORS OVERLOADING
 	void operator=(const Ticket& toBeCopied);
-	char operator[](int index);	// return the indexth letter of the owner's name
+	char operator[](int index);	// return the index+1th letter of the owner's name
 	std::string operator+(Ticket rightTicket);	// return the names of the owners
 	Ticket operator++(int);	// change vip status to true
 	Ticket operator++();
