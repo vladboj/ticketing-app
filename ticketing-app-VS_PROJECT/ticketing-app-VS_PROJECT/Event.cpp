@@ -57,7 +57,8 @@ Event::Event(const char* newName, EventLocation newLocation, Date newDate, Time 
 // COPY CONSTRUCTOR
 Event::Event(const Event& toBeCopied) {
 	this->id = toBeCopied.id;
-	this->setName(toBeCopied.name);
+	this->name = new char[strlen(toBeCopied.name) + 1];
+	strcpy_s(this->name, strlen(toBeCopied.name) + 1, toBeCopied.name);
 	this->location = toBeCopied.location;
 	this->date = toBeCopied.date;
 	this->time = toBeCopied.time;

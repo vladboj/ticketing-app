@@ -111,7 +111,7 @@ void operator>>(std::istream& console, Ticket& myTicket) {
 	Event::printEvents();
 	std::cout << "\nEnter ID of the event you want!\n";
 	int chosenEventId;
-	std::cin >> chosenEventId;
+	console >> chosenEventId;
 	myTicket.associatedEvent = Event::getEvent(chosenEventId);
 	
 	// vip status

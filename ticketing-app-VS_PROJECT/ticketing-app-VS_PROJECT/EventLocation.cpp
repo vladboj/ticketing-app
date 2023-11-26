@@ -32,6 +32,16 @@ EventLocation::EventLocation(const EventLocation& toBeCopied) {
 	this->availableSeats = temp;
 }
 
+// DESTRUCTOR
+EventLocation::~EventLocation() {
+	if (this->name != nullptr) {
+		delete[] this->name;
+	}
+	if (this->address != nullptr) {
+		delete[] this->address;
+	}
+}
+
 // SETTERS
 void EventLocation::setName(const char* newName) {
 	if (newName == nullptr || strlen(newName) > 50) {
@@ -89,6 +99,9 @@ int EventLocation::getMaxSeats() {
 
 // OPERATORS OVERLOADING
 void EventLocation::operator=(const EventLocation& toBeCopied) {
+	if (this == &toBeCopied) {
+		return;
+	}
 	this->setName(toBeCopied.name);
 	this->setAddress(toBeCopied.address);
 	this->setNoZones(toBeCopied.noZones);

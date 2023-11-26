@@ -15,6 +15,9 @@ public:
 	EventLocation(const char* newName, const char* newAddress, int newNoZones, int newMaxSeats);
 	EventLocation(const EventLocation& toBeCopied);
 
+	// DESTRUCTOR
+	~EventLocation();
+
 	// SETTERS
 	void setName(const char* newName);
 	void setAddress(const char* newAddress);
