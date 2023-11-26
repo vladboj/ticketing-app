@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include <cmath> // for abs()
 
 // STATIC ATTRIBUTES INITIALIZATIONS
 Event* Event::events = nullptr;
@@ -125,6 +126,10 @@ void Event::operator=(const Event& toBeCopied) {
 
 char Event::operator[](int index) {
 	return this->name[index];
+}
+
+int Event::operator-(Event rightEvent) {
+	return abs((double)this->time.getHour() - (double)rightEvent.time.getHour());
 }
 
 void operator>>(std::istream& console, Event& myEvent) {

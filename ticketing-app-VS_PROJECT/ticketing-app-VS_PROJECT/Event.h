@@ -51,6 +51,7 @@ public:
 	// OPERATORS OVERLOADING
 	void operator=(const Event& toBeCopied);
 	char operator[](int index);	// return first letter of name
+	int operator-(Event rightEvent);	// return how many hours are between the events
 
 	friend void operator>>(std::istream& console, Event& myEvent);
 	friend void operator<<(std::ostream& console, const Event& myEvent);
