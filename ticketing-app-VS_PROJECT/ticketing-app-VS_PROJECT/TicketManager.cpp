@@ -9,7 +9,7 @@ void TicketManager::startApp() {
 		this->displayMenu();
 		std::cout << "\nEnter your choice: ";
 		std::cin >> choice;
-		if (choice > 4) {
+		if (choice > 5) {
 			std::cout << "\nINVALID OPTION!\n";
 		}
 
@@ -23,8 +23,11 @@ void TicketManager::startApp() {
 		case 3:
 			this->validateTicket();
 			break;
+		case 4:
+			this->testCode();
+			break;
 		}
-	} while (choice != 4);
+	} while (choice != 5);
 }
 
 void TicketManager::displayMenu() {
@@ -35,7 +38,8 @@ void TicketManager::displayMenu() {
 	std::cout << "| 1. Add Event       |\n";
 	std::cout << "| 2. Generate Ticket |\n";
 	std::cout << "| 3. Validate Ticket |\n";
-	std::cout << "| 4. EXIT            |\n";
+	std::cout << "| 4. Test code       |\n";
+	std::cout << "| 5. EXIT            |\n";
 	std::cout << "|                    |\n";
 	std::cout << "|--------------------|\n";
 }
@@ -44,16 +48,12 @@ void TicketManager::addEvent() {
 	Event newEvent;
 	std::cin >> newEvent;
 	Event::addEvent(newEvent);
-	
-	//Event::printEvents();
 }
 
 void TicketManager::generateTicket() {
 	Ticket newTicket;
 	std::cin >> newTicket;
 	Ticket::addTicket(newTicket);
-
-	//Ticket::printTickets();
 }
 
 void TicketManager::validateTicket() {
@@ -75,6 +75,10 @@ void TicketManager::validateTicket() {
 	else {
 		std::cout << "\nTicket is invalid\n";
 	}
+}
+
+void TicketManager::testCode() {
+	
 }
 
 // if maxSeats is not divisible by noZones, it is not good
