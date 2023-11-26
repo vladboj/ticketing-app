@@ -52,8 +52,8 @@ public:
 	void operator=(const Event& toBeCopied);
 	char operator[](int index);	// return first letter of name
 	int operator-(Event rightEvent);	// return how many hours are between the events
-	Time operator++(int);	// return and post-increment time by 1 hour
-	Time operator++();	// return and pre-increment time by 1 hour
+	Event operator++(int);	// return and post-increment time by 1 hour
+	Event operator++();	// return and pre-increment time by 1 hour
 	explicit operator int();	// return number of seconds of the time since midnight
 	std::string operator!();	// return name spelled backwards :P
 	bool operator<(const Event& rightEvent);	// compares ids

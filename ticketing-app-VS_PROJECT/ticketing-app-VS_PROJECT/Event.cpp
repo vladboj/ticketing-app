@@ -132,15 +132,15 @@ int Event::operator-(Event rightEvent) {
 	return abs(this->time.getHour() - rightEvent.time.getHour());
 }
 
-Time Event::operator++(int) {
-	Time copy = this->time;
+Event Event::operator++(int) {
+	Event copy = *this;
 	this->time.setHour((this->time.getHour() + 1) % 24);
 	return copy;
 }
 
-Time Event::operator++() {
+Event Event::operator++() {
 	this->time.setHour((this->time.getHour() + 1) % 24);
-	return this->time;
+	return *this;
 }
 
 explicit Event::operator int() {
