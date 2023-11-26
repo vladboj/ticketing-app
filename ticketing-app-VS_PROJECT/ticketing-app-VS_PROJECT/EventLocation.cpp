@@ -149,6 +149,10 @@ EventLocation EventLocation::operator--() {
 	return *this;
 }
 
+bool EventLocation::operator<(const EventLocation& rightEventLocation) {
+	return this->availableSeats < rightEventLocation.availableSeats;
+}
+
 bool EventLocation::operator==(const EventLocation& rightEventLocation) {
 	if (strcmp(this->name, rightEventLocation.name) != 0) return false;
 	if (strcmp(this->address, rightEventLocation.address) != 0) return false;
