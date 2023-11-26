@@ -65,6 +65,10 @@ Ticket* Ticket::getTickets() {
 	return newTickets;
 }
 
+Ticket Ticket::getTicket(int index) {
+	return Ticket::tickets[index];
+}
+
 // DEFAULT CONSTRUCTOR
 Ticket::Ticket() : id(NEXT_TICKET_ID), ownerName(nullptr), associatedEvent(Event::Event()), vipStatus(false) {}
 
@@ -143,6 +147,10 @@ char Ticket::operator[](int index) {
 	return this->ownerName[index];
 }
 
+std::string Ticket::operator+(Ticket rightTicket) {
+	return std::string(this->ownerName) + " and " + std::string(rightTicket.ownerName);
+}
+
 void operator>>(std::istream& console, Ticket& myTicket) {
 	std::cout << "Enter your name: ";
 	char buffer[Ticket::MAX_NAME_LENGTH + 1];
@@ -172,7 +180,7 @@ void operator>>(std::istream& console, Ticket& myTicket) {
 	myTicket.vipStatus = (chosenVipStatus == 1) ? true : false;
 
 	// printing the ticket id
-	std::cout << "Your ticket ID is " << myTicket.id << std::endl;
+	std::cout << "\nYour ticket ID is " << myTicket.id << std::endl;
 }
 
 void operator<<(std::ostream& console, const Ticket& myTicket) {

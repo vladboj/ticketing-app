@@ -24,6 +24,7 @@ public:
 	static void addTicket(const Ticket& newTicket);
 	static int getNoTickets();
 	static Ticket* getTickets();
+	static Ticket getTicket(int index);
 
 	// CONSTRUCTORS
 	Ticket();
@@ -47,6 +48,7 @@ public:
 	// OPERATORS OVERLOADING
 	void operator=(const Ticket& toBeCopied);
 	char operator[](int index);
+	std::string operator+(Ticket rightTicket);	// return the names of the owners
 
 	friend void operator>>(std::istream& console, Ticket& myTicket);
 	friend void operator<<(std::ostream& console, const Ticket& myTicket);
