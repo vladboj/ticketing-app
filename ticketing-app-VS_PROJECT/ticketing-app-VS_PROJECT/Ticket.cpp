@@ -162,6 +162,14 @@ Ticket Ticket::operator++() {
 	return *this;
 }
 
+bool Ticket::operator==(const Ticket& rightTicket) {
+	if (this->id != rightTicket.id) return false;
+	if (strcmp(this->ownerName, rightTicket.ownerName) != 0) return false;
+	if (!(this->associatedEvent == rightTicket.associatedEvent)) return false;
+	if (this->vipStatus != rightTicket.vipStatus) return false;
+	return true;
+}
+
 void operator>>(std::istream& console, Ticket& myTicket) {
 	std::cout << "Enter your name: ";
 	char buffer[Ticket::MAX_NAME_LENGTH + 1];
