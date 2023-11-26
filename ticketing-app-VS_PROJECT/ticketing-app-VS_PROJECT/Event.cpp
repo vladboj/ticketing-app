@@ -158,6 +158,10 @@ std::string Event::operator!() {
 	return reversedName;
 }
 
+bool Event::operator<(const Event& rightEvent) {
+	return this->id < rightEvent.id;
+}
+
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
 	std::cout << "Name: ";
