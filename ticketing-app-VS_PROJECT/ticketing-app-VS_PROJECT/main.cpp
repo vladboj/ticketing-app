@@ -1,7 +1,7 @@
 #include "TicketManager.h";
 
 int main() {
-	TicketManager ticketManager;
+	TicketManager& ticketManager = TicketManager::getInstance();
 
 	ticketManager.startApp();
 }

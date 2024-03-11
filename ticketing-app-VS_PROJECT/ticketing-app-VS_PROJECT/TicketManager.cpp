@@ -3,6 +3,16 @@
 #include "Ticket.h"
 #include <iostream>
 
+TicketManager::TicketManager() {}
+
+TicketManager::~TicketManager() {}
+
+TicketManager TicketManager::instance;
+
+TicketManager& TicketManager::getInstance() {
+	return TicketManager::instance;
+}
+
 void TicketManager::startApp() {
 	int choice;
 	do {
