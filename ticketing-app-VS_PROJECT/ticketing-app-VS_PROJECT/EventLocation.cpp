@@ -7,7 +7,7 @@
 const int EventLocation::MIN_NAME_LENGTH = 3;
 const int EventLocation::MAX_NAME_LENGTH = 50;
 
-const int EventLocation::MIN_ADDRESS_LENGTH = 10;
+const int EventLocation::MIN_ADDRESS_LENGTH = 5;
 const int EventLocation::MAX_ADDRESS_LENGTH = 200;
 
 // DEFAULT CONSTRUCTOR
