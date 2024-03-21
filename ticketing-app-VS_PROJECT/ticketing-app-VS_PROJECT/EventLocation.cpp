@@ -11,14 +11,12 @@ const int EventLocation::MIN_ADDRESS_LENGTH = 5;
 const int EventLocation::MAX_ADDRESS_LENGTH = 200;
 
 // DEFAULT CONSTRUCTOR
-EventLocation::EventLocation() : name(nullptr), address(nullptr), noZones(0), availableSeats(0), availableSeatsPerZone(nullptr) {}
+EventLocation::EventLocation() : name(nullptr), address(nullptr) {}
 
 // CONSTRUCTOR WITH ARGUMENTS
-EventLocation::EventLocation(const char* newName, const char* newAddress, int newNoZones, int newAvailableSeats) {
+EventLocation::EventLocation(const char* newName, const char* newAddress) {
 	this->setName(newName);
 	this->setAddress(newAddress);
-	this->setNoZones(newNoZones);
-	this->setAvailableSeats(newAvailableSeats);
 }
 
 // COPY CONSTRUCTOR
@@ -27,18 +25,6 @@ EventLocation::EventLocation(const EventLocation& toBeCopied) {
 	strcpy_s(this->name, strlen(toBeCopied.name) + 1, toBeCopied.name);
 	this->address = new char[strlen(toBeCopied.address) + 1];
 	strcpy_s(this->address, strlen(toBeCopied.address) + 1, toBeCopied.address);
-	this->setNoZones(toBeCopied.noZones);
-	this->setAvailableSeats(toBeCopied.availableSeats);
-
-	// available seats
-	int* temp = new int[this->noZones];
-	for (int i = 0; i < this->noZones; i++) {
-		temp[i] = toBeCopied.availableSeatsPerZone[i];
-	}
-	if (this->availableSeatsPerZone != nullptr) {
-		delete[] this->availableSeatsPerZone;
-	}
-	this->availableSeatsPerZone = temp;
 }
 
 // DESTRUCTOR
@@ -48,9 +34,6 @@ EventLocation::~EventLocation() {
 	}
 	if (this->address != nullptr) {
 		delete[] this->address;
-	}
-	if (this->availableSeatsPerZone != nullptr) {
-		delete[] this->availableSeatsPerZone;
 	}
 }
 
@@ -79,58 +62,12 @@ void EventLocation::setAddress(const char* newAddress) {
 	this->address = temp;
 }
 
-void EventLocation::setNoZones(int newNoZones) {
-	if (newNoZones < 1) {
-		throw std::exception("Invalid number of zones");
-	}
-	this->noZones = newNoZones;
-}
-
-void EventLocation::setAvailableSeats(int newAvailableSeats) {
-	if (newAvailableSeats < 1 || newAvailableSeats < this->noZones) {
-		throw std::exception("Invalid number of available seats");
-	}
-	this->availableSeats = newAvailableSeats;
-
-	// available seats
-	this->availableSeatsPerZone = new int[this->noZones];
-	for (int i = 0; i < this->noZones; i++) {
-		this->availableSeatsPerZone[i] = this->availableSeats / this->noZones;
-	}
-	this->availableSeatsPerZone[this->noZones - 1] += this->availableSeats % this->noZones;
-}
-
 // GETTERS
 std::string EventLocation::getName() {
 	return std::string(this->name);
 }
 std::string EventLocation::getAddress() {
 	return std::string(this->address);
-}
-
-int EventLocation::getNoZones() {
-	return this->noZones;
-}
-
-int EventLocation::getAvailableSeats() {
-	return this->availableSeats;
-}
-
-int* EventLocation::getAvailableSeatsPerZone() {
-	int* temp = new int[this->noZones];
-	for (int i = 0; i < this->noZones; i++) {
-		temp[i] = this->availableSeatsPerZone[i];
-	}
-	return temp;
-}
-
-void EventLocation::printAvailableZones() {
-	std::cout << "\nAvailable zones: ";
-	for (int i = 0; i < this->noZones; i++) {
-		if (this->availableSeatsPerZone[i] > 0) {
-			std::cout << i + 1 << " ";
-		}
-	}
 }
 
 // OPERATORS OVERLOADING
@@ -140,48 +77,15 @@ void EventLocation::operator=(const EventLocation& toBeCopied) {
 	}
 	this->setName(toBeCopied.name);
 	this->setAddress(toBeCopied.address);
-	this->setNoZones(toBeCopied.noZones);
-	this->setAvailableSeats(toBeCopied.availableSeats);
-
-	// available seats
-	int* temp = new int[this->noZones];
-	for (int i = 0; i < this->noZones; i++) {
-		temp[i] = toBeCopied.availableSeatsPerZone[i];
-	}
-	if (this->availableSeatsPerZone != nullptr) {
-		delete[] this->availableSeatsPerZone;
-	}
-	this->availableSeatsPerZone = temp;
 }
 
 char EventLocation::operator[](int index) {
 	return this->name[index];
 }
 
-int EventLocation::operator+(EventLocation rightEventLocation) {
-	return this->availableSeats + rightEventLocation.availableSeats;
-}
-
-EventLocation EventLocation::operator--(int) {
-	EventLocation copy = *this;
-	this->availableSeats--;
-	return copy;
-}
-
-EventLocation EventLocation::operator--() {
-	this->availableSeats--;
-	return *this;
-}
-
-bool EventLocation::operator<(const EventLocation& rightEventLocation) {
-	return this->availableSeats < rightEventLocation.availableSeats;
-}
-
 bool EventLocation::operator==(const EventLocation& rightEventLocation) {
 	if (strcmp(this->name, rightEventLocation.name) != 0) return false;
 	if (strcmp(this->address, rightEventLocation.address) != 0) return false;
-	if (this->noZones != rightEventLocation.noZones) return false;
-	if (this->availableSeats != rightEventLocation.availableSeats) return false;
 	return true;
 }
 
@@ -211,42 +115,9 @@ void operator>>(std::istream& console, EventLocation& myEventLocation) {
 			std::cout << "!!! " << e.what() << " !!!\n";
 		}
 	}
-
-	while (true) {
-		try {
-			int noZones;
-			std::cout << "Number of zones: ";
-			console >> noZones;
-			myEventLocation.setNoZones(noZones);
-			break;
-		}
-		catch (const std::exception& e) {
-			std::cout << "!!! " << e.what() << " !!!\n";
-		}
-	}
-	
-	while (true) {
-		try {
-			std::cout << "Number of total available seats: ";
-			console >> myEventLocation.availableSeats;
-			myEventLocation.availableSeatsPerZone = new int[myEventLocation.noZones];
-			for (int i = 0; i < myEventLocation.noZones; i++) {
-				myEventLocation.availableSeatsPerZone[i] = myEventLocation.availableSeats / myEventLocation.noZones;
-			}
-			break;
-		}
-		catch (const std::exception& e) {
-			std::cout << "!!! " << e.what() << " !!!\n";
-		}
-	}
 }
 
 void operator<<(std::ostream& console, const EventLocation& myEventLocation) {
 	console << "\nName: " << myEventLocation.name;
 	console << "\nAddress: " << myEventLocation.address;
-	console << "\nNumber of zones: " << myEventLocation.noZones;
-	console << "\nNumber of total available seats: " << myEventLocation.availableSeats;
-	for (int i = 0; i < myEventLocation.noZones; i++) {
-		console << "\nNumber of available seats for zone " << i + 1 << ": " << myEventLocation.availableSeatsPerZone[i];
-	}
 }
