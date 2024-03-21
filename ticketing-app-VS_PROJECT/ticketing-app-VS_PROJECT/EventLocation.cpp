@@ -186,28 +186,58 @@ bool EventLocation::operator==(const EventLocation& rightEventLocation) {
 }
 
 void operator>>(std::istream& console, EventLocation& myEventLocation) {
-	// name
-	std::cout << "Name: ";
-	char buffer1[EventLocation::MAX_NAME_LENGTH + 1];
-	console.getline(buffer1, EventLocation::MAX_NAME_LENGTH + 1);
-	myEventLocation.setName(buffer1);
+	while (true) {
+		try {
+			std::cout << "Name: ";
+			char buffer1[EventLocation::MAX_NAME_LENGTH + 1];
+			console.getline(buffer1, EventLocation::MAX_NAME_LENGTH + 1);
+			myEventLocation.setName(buffer1);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 
-	// address
-	std::cout << "Address: ";
-	char buffer2[EventLocation::MAX_ADDRESS_LENGTH + 1];
-	console.getline(buffer2, EventLocation::MAX_ADDRESS_LENGTH);
-	myEventLocation.setAddress(buffer2);
+	while (true) {
+		try {
+			std::cout << "Address: ";
+			char buffer2[EventLocation::MAX_ADDRESS_LENGTH + 1];
+			console.getline(buffer2, EventLocation::MAX_ADDRESS_LENGTH);
+			myEventLocation.setAddress(buffer2);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 
-	// number of zones
-	std::cout << "Number of zones: ";
-	console >> myEventLocation.noZones;
+	while (true) {
+		try {
+			int noZones;
+			std::cout << "Number of zones: ";
+			console >> noZones;
+			myEventLocation.setNoZones(noZones);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 	
-	// max number of seats
-	std::cout << "Number of total available seats: ";
-	console >> myEventLocation.availableSeats;
-	myEventLocation.availableSeatsPerZone = new int[myEventLocation.noZones];
-	for (int i = 0; i < myEventLocation.noZones; i++) {
-		myEventLocation.availableSeatsPerZone[i] = myEventLocation.availableSeats / myEventLocation.noZones;
+	while (true) {
+		try {
+			std::cout << "Number of total available seats: ";
+			console >> myEventLocation.availableSeats;
+			myEventLocation.availableSeatsPerZone = new int[myEventLocation.noZones];
+			for (int i = 0; i < myEventLocation.noZones; i++) {
+				myEventLocation.availableSeatsPerZone[i] = myEventLocation.availableSeats / myEventLocation.noZones;
+			}
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
 	}
 }
 

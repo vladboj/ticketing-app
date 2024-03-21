@@ -88,7 +88,4 @@ void TicketManager::validateTicket() {
 }
 
 void TicketManager::testCode() {
-
 }
-
-// if maxSeats is not divisible by noZones, it is not good

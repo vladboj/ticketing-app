@@ -171,19 +171,36 @@ bool Ticket::operator==(const Ticket& rightTicket) {
 }
 
 void operator>>(std::istream& console, Ticket& myTicket) {
-	std::cout << "Enter your name: ";
-	char buffer[Ticket::MAX_NAME_LENGTH + 1];
-	console.ignore();
-	console.getline(buffer, Ticket::MAX_NAME_LENGTH + 1);
-	myTicket.setOwnerName(buffer);
+	while (true) {
+		try {
+			std::cout << "Enter your name: ";
+			char buffer[Ticket::MAX_NAME_LENGTH + 1];
+			console.ignore();
+			console.getline(buffer, Ticket::MAX_NAME_LENGTH + 1);
+			myTicket.setOwnerName(buffer);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 
 	// associated event
 	Event::printEvents();
-	std::cout << "\nEnter ID of the event you want!\n";
 	int chosenEventId;
-	console >> chosenEventId;
+	while (true) {
+		std::cout << "\nEnter ID of the event you want!\n";
+		console >> chosenEventId;
+		if (chosenEventId >= 1 && chosenEventId <= Event::getNoEvents()) {
+			break;
+		}
+		else {
+			std::cout << "\n!!! invalid event ID !!!\n";
+		}
+	}
 	myTicket.associatedEvent = Event::getEvent(chosenEventId);
-	
+
+
 	// vip status
 	std::cout << "\nDo you want to be a VIP? (1 for YES --- 2 for NO)\n";
 	int chosenVipStatus;
@@ -193,7 +210,7 @@ void operator>>(std::istream& console, Ticket& myTicket) {
 			break;
 		}
 		else {
-			std::cout << "\n!!!choose either 1 or 2!!!\n";
+			std::cout << "\n!!! choose either 1 or 2 !!!\n";
 		}
 	}
 	myTicket.vipStatus = (chosenVipStatus == 1) ? true : false;

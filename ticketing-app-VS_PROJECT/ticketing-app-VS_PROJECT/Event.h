@@ -26,6 +26,7 @@ public:
 	static void printEvents();
 	static void addEvent(const Event& newEvent);
 	static Event getEvent(int id);
+	static int getNoEvents();
 
 	// CONSTRUCTORS
 	Event();

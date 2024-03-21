@@ -43,6 +43,10 @@ Event Event::getEvent(int id) {
 	return Event::events[id - 1];
 }
 
+int Event::getNoEvents() {
+	return Event::noEvents;
+}
+
 // DEFAULT CONSTRUCTOR
 Event::Event() : id(Event::NEXT_EVENT_ID), name(nullptr), location(EventLocation::EventLocation()),
 date(Date::Date()), time(Time::Time()) {}
@@ -173,17 +177,49 @@ bool Event::operator==(const Event& rightEvent) {
 
 void operator>>(std::istream& console, Event& myEvent) {
 	std::cout << "\n------------------ INPUT EVENT " << myEvent.id << " ------------------\n";
-	std::cout << "Name: ";
-	char buffer[Event::MAX_NAME_LENGTH];
-	console.ignore();
-	console.getline(buffer, Event::MAX_NAME_LENGTH + 1);
-	myEvent.setName(buffer);
-	std::cout << "\nLocation\n";
-	console >> myEvent.location;
-	std::cout << "\nDate\n";
-	console >> myEvent.date;
-	std::cout << "\nTime\n";
-	console >> myEvent.time;
+	while (true) {
+		try {
+			std::cout << "Name: ";
+			char buffer[Event::MAX_NAME_LENGTH];
+			console.ignore();
+			console.getline(buffer, Event::MAX_NAME_LENGTH + 1);
+			myEvent.setName(buffer);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
+	while (true) {
+		try {
+			std::cout << "\nLocation\n";
+			console >> myEvent.location;
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
+	while (true) {
+		try {
+			std::cout << "\nDate\n";
+			console >> myEvent.date;
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
+	while (true) {
+		try {
+			std::cout << "\nTime\n";
+			console >> myEvent.time;
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 	std::cout << "---------------------------------------------------\n";
 }
 

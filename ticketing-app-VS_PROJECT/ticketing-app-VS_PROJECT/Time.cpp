@@ -14,7 +14,7 @@ Time::Time(int newHour, int newMinute) {
 // SETTERS
 void Time::setHour(int newHour) {
 	if (newHour < 0 || newHour > 23) {
-		throw std::exception("Invalid minute value");
+		throw std::exception("Invalid hour value");
 	}
 	this->hour = newHour;
 }
@@ -44,10 +44,30 @@ bool Time::operator==(const Time& rightTime) {
 
 void operator>>(std::istream& console, Time& myTime) {
 	std::cout << "(24-hour clock format)\n";
-	std::cout << "Hour: ";
-	console >> myTime.hour;
-	std::cout << "Minute: ";
-	console >> myTime.minute;
+	while (true) {
+		try {
+			int hour;
+			std::cout << "Hour: ";
+			console >> hour;
+			myTime.setHour(hour);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
+	while (true) {
+		try {
+			int minute;
+			std::cout << "Minute: ";
+			console >> minute;
+			myTime.setMinute(minute);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 }
 
 void operator<<(std::ostream& console, const Time& myTime) {

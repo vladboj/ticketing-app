@@ -56,12 +56,42 @@ bool Date::operator==(const Date& rightDate) {
 }
 
 void operator>>(std::istream& console, Date& myDate) {
-	std::cout << "Day: ";
-	console >> myDate.day;
-	std::cout << "Month: ";
-	console >> myDate.month;
-	std::cout << "Year: ";
-	console >> myDate.year;
+	while (true) {
+		try {
+			std::cout << "Day: ";
+			int day;
+			console >> day;
+			myDate.setDay(day);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
+	while (true) {
+		try {
+			std::cout << "Month: ";
+			int month;
+			console >> month;
+			myDate.setMonth(month);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
+	while (true) {
+		try {
+			int year;
+			std::cout << "Year: ";
+			console >> year;
+			myDate.setYear(year);
+			break;
+		}
+		catch (const std::exception& e) {
+			std::cout << "!!! " << e.what() << " !!!\n";
+		}
+	}
 }
 
 void operator<<(std::ostream& console, const Date& myDate) {
